@@ -1,0 +1,2 @@
+module JagodeHelper
+end

@@ -1,0 +1,55 @@
+
+
+<h1>Jagode, model i ostalo</h1>
+
+<img src="/assets/jagoda_small.jpeg"><br>
+<b>TAC – total anthocyans content</b>
+
+<%= form_tag('/jagode/') %>
+<br>
+Sorta jagoda
+<br>
+<%= radio_button_tag(:sorta, value = "1", checked = true, options = {})  %>
+<%= label_tag('Elsanta ili Maya') %>
+
+<br>
+<%= radio_button_tag(:sorta, value = "0", checked = false, options = {})  %> 
+<%= label_tag('Marmolada ili Queen Elisa') %>
+
+<br>
+---
+<br>
+Tip jagoda
+<br>
+<%= radio_button_tag(:tip, value = "1", checked = true, options = {})  %>
+<%= label_tag('fresh strawberry') %>
+
+<br>
+<%= radio_button_tag(:tip, value = "0", checked = false, options = {})  %> 
+<%= label_tag('Jam') %>
+
+<br>
+---
+<br>
+
+<br>
+
+
+<%= label_tag('parametar "A"') %>
+<%= text_field_tag(:param_a) %>
+<br>
+<%= label_tag('parametar "B"') %>
+<%= text_field_tag(:param_b) %>
+<br>
+
+<%= submit_tag('Izračunaj') %>
+
+<br>
+<% unless @rezultat.nil? %>
+
+<div style="color:red">
+<%= label_tag('TAC[mg/100g]: ') %> <%= @rezultat  %>
+</div>
+
+<br>
+<% end %>
