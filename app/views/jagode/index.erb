@@ -1,25 +1,26 @@
 
 
-<h1>Jagode, model i ostalo</h1>
+<h2>Total anthocyans content calculator </h2>
+<h2>for different strawberry cultivars</h2>
 
 <img src="/assets/jagoda_small.jpeg"><br>
 <b>TAC – total anthocyans content</b>
 
 <%= form_tag('/jagode/') %>
 <br>
-Sorta jagoda
+Strawberry cultivars
 <br>
 <%= radio_button_tag(:sorta, value = "1", checked = true, options = {})  %>
-<%= label_tag('Elsanta ili Maya') %>
+<%= label_tag('Elsanta or Maya') %>
 
 <br>
 <%= radio_button_tag(:sorta, value = "0", checked = false, options = {})  %> 
-<%= label_tag('Marmolada ili Queen Elisa') %>
+<%= label_tag('Marmolada or Queen Elisa') %>
 
 <br>
 ---
 <br>
-Tip jagoda
+Strawberry form
 <br>
 <%= radio_button_tag(:tip, value = "1", checked = true, options = {})  %>
 <%= label_tag('fresh strawberry') %>
@@ -34,15 +35,14 @@ Tip jagoda
 
 <br>
 
-
-<%= label_tag('parametar "A"') %>
+<%= label_tag(:CIELABA,"CIELAB coordinate 'a'") %>
 <%= text_field_tag(:param_a) %>
 <br>
-<%= label_tag('parametar "B"') %>
+<%= label_tag(:CIELABB,"CIELAB coordinate 'b'") %>
 <%= text_field_tag(:param_b) %>
 <br>
 
-<%= submit_tag('Izračunaj') %>
+<%= submit_tag('Calculate') %>
 
 <br>
 <% unless @rezultat.nil? %>
