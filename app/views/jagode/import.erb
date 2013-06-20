@@ -1,0 +1,30 @@
+
+<h1>Import CIELAB coordinates from file</h1>
+
+<%= form_for :file_upload, :html => {:multipart => true} do |f| %>
+  <%= f.file_field :my_file %>
+  <%= f.submit "Upload" %>
+<% end %>
+
+<% unless @result.nil? %>
+<br>
+<table border="1">
+  <th>TAC[mg/kg]</th>
+  <th>Strawberry cultivars</th>
+  <th>Strawberry form</th>
+  <th>CIELAB coordinate 'a'</th>
+  <th>CIELAB coordinate 'b'</th>  
+
+<% @result.each do |res| %>
+  <tr align='center'>
+    <td align='center' style="color:red"><b><%= res[0] %></b></td>
+    <td align='center'><%= res[1] == "1" ? "Elsanta or Maya" : "Marmolada or Queen Elisa"%></td>
+    <td align='center'><%= res[2] == "1" ? "Fresh Strawberry" : "Jam" %></td>
+    <td align='center'><%= res[3] %></td>
+    <td align='center'><%= res[4] %></td>
+  </tr>
+<% end %>
+  
+</table>
+
+<% end %>

@@ -1,4 +1,5 @@
 require 'fileutils'
+require "csv"
 
 class JagodeController < ApplicationController
 
@@ -27,7 +28,7 @@ class JagodeController < ApplicationController
 	  
 	  tmp = params[:file_upload][:my_file].tempfile
 
-		require "csv"
+		
 		parsed_file = CSV.read(tmp, { :col_sep => "\t" })
 		
 		@result =[]
