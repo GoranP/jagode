@@ -11,11 +11,11 @@
 Strawberry cultivars
 <br>
 <%= radio_button_tag(:sorta, value = "1", checked = true, options = {})  %>
-<%= label_tag('Elsanta or Maya') %>
+<%= label_tag(:cultivars,'Elsanta or Maya') %>
 
 <br>
 <%= radio_button_tag(:sorta, value = "0", checked = false, options = {})  %> 
-<%= label_tag('Marmolada or Queen Elisa') %>
+<%= label_tag(:cultivars,'Marmolada or Queen Elisa') %>
 
 <br>
 ---
@@ -23,11 +23,11 @@ Strawberry cultivars
 Strawberry form
 <br>
 <%= radio_button_tag(:tip, value = "1", checked = true, options = {})  %>
-<%= label_tag('fresh strawberry') %>
+<%= label_tag(:form,'Fresh Strawberry') %>
 
 <br>
 <%= radio_button_tag(:tip, value = "0", checked = false, options = {})  %> 
-<%= label_tag('Jam') %>
+<%= label_tag(:form,'Jam') %>
 
 <br>
 ---
