@@ -50,7 +50,7 @@ Strawberry::Application.routes.draw do
   # just remember to delete public/index.html.
   root :to => 'jagode#index'
 
-  match ':controller(/:action)'
+  match ':controller(/:action)',:via => [:get, :post]
 
   # See how all your routes lay out with "rake routes"
 
