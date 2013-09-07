@@ -14,7 +14,7 @@ set :use_sudo, false
 set :deploy_to, "/var/www/strawberry"
 
 set :branch, "master"
-#set :deploy_via, :remote_cache
+set :deploy_via, :remote_cache
 
 set :keep_releases, 5
 
