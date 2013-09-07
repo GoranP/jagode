@@ -1,3 +1,6 @@
+require 'bundler/capistrano'
+
+
 server "strawberry.pbf.hr", :app, :web, :db, :primary => true
 
 set :application, "jagode"
@@ -6,10 +9,12 @@ set :scm, "git"
 set :user, "goran"  # The server's user for deploys
 set :rails_env, "production"
 
+set :use_sudo, false
+
 set :deploy_to, "/var/www/strawberry"
 
 set :branch, "master"
-set :deploy_via, :remote_cache
+#set :deploy_via, :remote_cache
 
 set :keep_releases, 5
 
