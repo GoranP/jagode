@@ -9,13 +9,15 @@ class JagodeController < ApplicationController
 		#logger.debug(params[:param1])
 		#formula
 		@tac = 273.63 - 55.23*(params[:sorta].to_i) + 78.22*(params[:tip].to_i) - 14.96*params[:param_a].to_f + 12.32*params[:param_b].to_f
-		@rezultat = @tac.round(2)
+		@rezultat = @tac>0 ? @tac.round(2) : 0
 		end
 
 	end
 
 	def calculate(sorta, tip, param_a, param_b)
-		(273.63 - 55.23*(sorta.to_i) + 78.22*(tip.to_i) - 14.96*(param_a.to_f) + 12.32*(param_b.to_f)).round(2)
+		retval=(273.63 - 55.23*(sorta.to_i) + 78.22*(tip.to_i) - 14.96*(param_a.to_f) + 12.32*(param_b.to_f)).round(2)
+		retval = 0 if retval < 0
+		retval
 	end
 
 	def import
