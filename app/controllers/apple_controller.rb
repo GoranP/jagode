@@ -7,8 +7,11 @@ class AppleController < ApplicationController
 	def welcome
 		render :layout => "application"
 	end
-
 	
+	def team_members
+		render :layout => "team_members"
+	end
+
 	def eq1
 		if request.post?
 			logger.debug(params)
