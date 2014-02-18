@@ -1,0 +1,56 @@
+
+<br>
+<strong>Select apple cultivar:</strong>
+<br>
+
+<%= form_tag('/apple/eq5') %>
+
+<%= radio_button_tag(:sorta, value = "1", checked = true, options = {})  %>
+<%= label_tag(:cultivars,'Golden Delicious') %>
+<br>
+<%= radio_button_tag(:sorta, value = "2", checked = false, options = {})  %>
+<%= label_tag(:cultivars,'Cripps Pink') %>
+<br>
+
+----
+<br>
+<strong>Select anti-browning treatment:</strong>
+<br>
+<br>
+<%= select_tag( :treatment,options_for_select(
+[	["No treatment",1],
+	["Ascorbic with citric acid",2],
+	["Ascorbic acid with NaCl",3],
+	["Ascorbic acid with CaCl2",4],
+	["NaCl",5],
+	["Citric acid",6],
+	["Ca-ascorbate",7],
+	["Ultrasound (1 min) with Ca-ascorbate",8],
+	["Ultrasound (3 min) with Ca-ascorbate",9],
+	["Ultrasound (1 min) ascorbic and citric acid",10],
+	["Ultrasound (3 min) ascorbic and citric acid",11]
+]),{})
+%>
+<br>
+<% unless @rezultat.nil? %>
+<br>Color change is: 
+<div style="color:red">ΔE*ab = <%= number_with_precision @rezultat,:precision=>2  %> </div>
+<% end %>
+<br>
+<%= submit_tag('Calculate') %>
+
+<br>
+<br>
+<br>
+<small>
+<strong>Sensory evaluation meaning:</strong><br>
+S.Ev. = 1.0 – 1.9 extremely unfavorable<br>
+S.Ev. = 2.0 – 2.9 highly unfavorable<br>
+S.Ev. = 3.0 – 3.9 moderately unfavorable<br>
+S.Ev. = 4.0 – 4.9 neither favorable nor unfavorable<br>
+S.Ev. = 5.0 – 5.9 moderately favorable<br>
+S.Ev. = 6.0 – 6.9 highly favorable<br>
+S.Ev. = 7.0 extremely favorable<br>
+</small>
+<br>
+

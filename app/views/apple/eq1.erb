@@ -1,0 +1,69 @@
+
+<br>
+<strong>Select apple cultivar:</strong>
+<br>
+<%= form_tag('/apple/eq1') %>
+<%= radio_button_tag(:sorta, value = "1", checked = true, options = {})  %>
+<%= label_tag(:cultivars,'Idared or Gloster') %>
+<br>
+<%= radio_button_tag(:sorta, value = "2", checked = false, options = {})  %>
+<%= label_tag(:cultivars,'Gala, Golden Delicious or Cripps Pink') %>
+<br>
+<%= radio_button_tag(:sorta, value = "3", checked = false, options = {})  %>
+<%= label_tag(:cultivars,'Breaburn or Fuji') %>
+<br>
+----
+<br>
+<strong>Type in colorimetric values & storage time (ST) / [h]:</strong>
+<br>
+
+<br>
+
+<table>
+<tr>
+<td><%= label_tag(:L,"L*") %></td>
+<td><%= text_field_tag(:param_L) %></td>
+</tr>
+<tr>
+<td><%= label_tag(:a,"a*") %></td>
+<td><%= text_field_tag(:param_a) %></td>
+</tr>
+<tr>
+<td><%= label_tag(:b,"b*") %></td>
+<td><%= text_field_tag(:param_b) %></td>
+</tr>
+<tr>
+<td><%= label_tag(:ST,"ST") %></td>
+<td><%= text_field_tag(:param_ST) %> <%= label_tag(:ST_H,"[h]") %></td>
+</tr>
+
+<% unless @rezultat.nil? %>
+<tr>
+	<td>Color change is: </td>
+	<td><strong><div style="color:red">ΔE*ab = <%= number_with_precision @rezultat,:precision=>2  %></div></strong></td>
+</tr>
+<% end %>
+
+</table>
+
+<%= submit_tag('Calculate') %>
+
+<br>
+
+
+<br>
+<small>
+<strong>Subjective assessment of color difference by unaided average human eye:</strong>
+<br>
+ΔE*ab < 0.5 color difference hardly noticeable<br>
+ΔE*ab = 0.5 – 1.5 slightly noticeable color difference <br>
+ΔE*ab = 1.5 – 3.0 noticeable color difference<br>
+ΔE*ab = 3.0 – 6.0 considerable color difference<br>
+ΔE*ab = 6.0 – 12.0 large color difference<br>
+ΔE*ab < 12.0 extremely large color difference<br> 
+(Yang, 2012)<br>
+
+
+</small>
+
+

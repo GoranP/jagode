@@ -1,0 +1,64 @@
+
+<br>
+<strong>Select apple cultivar:</strong>
+<br>
+
+<%= form_tag('/apple/eq4') %>
+
+<%= radio_button_tag(:sorta, value = "1", checked = true, options = {})  %>
+<%= label_tag(:cultivars,'Golden Delicious') %>
+<br>
+<%= radio_button_tag(:sorta, value = "2", checked = false, options = {})  %>
+<%= label_tag(:cultivars,'Cripps Pink') %>
+<br>
+
+----
+<br>
+<strong>Select anti-browning treatment:</strong>
+<br>
+<br>
+<%= select_tag( :treatment,options_for_select(
+[	["No treatment",1],
+	["Ascorbic with citric acid",2],
+	["Ascorbic acid with NaCl",3],
+	["Ascorbic acid with CaCl2",4],
+	["NaCl",5],
+	["Citric acid",6],
+	["Ca-ascorbate",7],
+	["Ultrasound (1 min) with Ca-ascorbate",8],
+	["Ultrasound (3 min) with Ca-ascorbate",9],
+	["Ultrasound (1 min) ascorbic and citric acid",10],
+	["Ultrasound (3 min) ascorbic and citric acid",11]
+]),{})
+%>
+<br>
+<br>
+ 
+<table>
+<tr>
+<td><%= label_tag(:L,"L*") %></td>
+<td><%= text_field_tag(:param_L) %></td>
+</tr>
+<tr>
+<td><%= label_tag(:a,"a*") %></td>
+<td><%= text_field_tag(:param_a) %></td>
+</tr>
+<tr>
+<td><%= label_tag(:b,"b*") %></td>
+<td><%= text_field_tag(:param_b) %></td>
+</tr>
+<tr>
+<td><%= label_tag(:ST,"ST") %></td>
+<td><%= text_field_tag(:param_ST) %> <%= label_tag(:ST_H,"[h]") %></td>
+</tr>
+</table>
+<% unless @rezultat.nil? %>
+<br>Color change is: 
+<strong><div style="color:red">ΔE*ab = <%= number_with_precision @rezultat,:precision=>2  %></div></strong>
+<% end %>
+<br>
+<br>
+<%= submit_tag('Calculate') %>
+
+<br>
+

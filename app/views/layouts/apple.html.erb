@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CAPPABLE</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<h1>Anti-browning Apple Calculator – CAPPABLE</h1>
+<%= image_tag "apple.jpg",  size: "470x300" %>
+<br>
+<%= link_to "[Equation 1]",  controller: "apple", action: "eq1" %>
+<%= link_to "[Equation 2 or 3]",  controller: "apple", action: "eq2" %>
+<!--<%= link_to "Equation 3",  controller: "apple", action: "eq3" %>-->
+<%= link_to "[Equation 4]",  controller: "apple", action: "eq4" %>
+<%= link_to "[Equation 5]",  controller: "apple", action: "eq5" %>
+<br>
+
+<%= yield %>
+
+
+<small>
+<br>
+References:<br>
+Yang, Y.M., J. Yu, N., (2012). Color Image Quality Assessment Based on CIEDE2000. Advances in Multimedia 2012, 1-7.<br>
+<small>
+
+<%= image_tag "pbf.jpg" %> 
+<%= image_tag "bicro.jpg", size: "320x120" %>
+
+</body>
+</html>

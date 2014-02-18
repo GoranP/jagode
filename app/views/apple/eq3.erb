@@ -1,0 +1,40 @@
+
+<br>
+<strong>Select apple cultivar:</strong>
+<br>
+<%= form_tag('/apple/eq3') %>
+
+<%= radio_button_tag(:sorta, value = "1", checked = true, options = {})  %>
+<%= label_tag(:cultivars,'Idared') %>
+<br>
+<%= radio_button_tag(:sorta, value = "2", checked = false, options = {})  %>
+<%= label_tag(:cultivars,'Golden Delicious') %>
+<br>
+<%= radio_button_tag(:sorta, value = "3", checked = false, options = {})  %>
+<%= label_tag(:cultivars,'Gala') %>
+<br>
+<%= radio_button_tag(:sorta, value = "4", checked = true, options = {})  %>
+<%= label_tag(:cultivars,'Gloster') %>
+<br>
+<%= radio_button_tag(:sorta, value = "5", checked = false, options = {})  %>
+<%= label_tag(:cultivars,'Cripps Pink') %>
+<br>
+<%= radio_button_tag(:sorta, value = "6", checked = false, options = {})  %>
+<%= label_tag(:cultivars,'Breaburn') %>
+<br>
+<%= radio_button_tag(:sorta, value = "7", checked = false, options = {})  %>
+<%= label_tag(:cultivars,'Fuji') %>
+<br>
+
+----
+
+<% unless @rezultat.nil? %>
+pH: <br>
+<div style="color:red">pH = <%= @rezultat  %> </div>
+<% end %>
+<br>
+
+<%= submit_tag('Calculate') %>
+
+<br>
+
