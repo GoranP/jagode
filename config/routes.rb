@@ -1,3 +1,9 @@
+class HostConstraint
+  def matches?(request)
+    request.host == "123"
+  end
+end
+
 Strawberry::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -48,7 +54,13 @@ Strawberry::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'jagode#index'
+
+  
+  match "/" => 'apple#index', :via => [:get, :post], :constraints => {:host => 'apple.pbf.hr'}
+  match "/" => 'jagode#index', :via => [:get, :post], :constraints => {:host => 'strawberry.pbf.hr'}  
+  
+  
+  root :to => 'apple#welcome'
 
   match ':controller(/:action)',:via => [:get, :post]
 

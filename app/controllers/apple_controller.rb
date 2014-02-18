@@ -3,7 +3,12 @@ class AppleController < ApplicationController
 	
 	def index
 	end
+	
+	def welcome
+		render :layout => "application"
+	end
 
+	
 	def eq1
 		if request.post?
 			logger.debug(params)
