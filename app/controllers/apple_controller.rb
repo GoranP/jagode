@@ -16,10 +16,10 @@ class AppleController < ApplicationController
 		if request.post?
 			logger.debug(params)
 			sorta = params[:sorta].to_i
-			a = params[:param_a].to_f
-			b = params[:param_b].to_f
-			l = params[:param_L].to_f
-			st= params[:param_ST].to_f
+			a = params[:param_a].to_f == 0.0 ? (10.0**-14).to_f : params[:param_a].to_f
+			b = params[:param_b].to_f == 0.0 ? (10.0**-14).to_f : params[:param_b].to_f
+			l = params[:param_L].to_f == 0.0 ? (10.0**-14).to_f : params[:param_L].to_f
+			st= params[:param_ST].to_f== 0.0 ? (10.0**-14).to_f : params[:param_ST].to_f
 			#Parameters:"sorta"=>"1", "param_L"=>"1", "param_a"=>"2", "param_b"=>"3", "param_ST"=>"4", "commit"=>"Calculate"}
 			@rezultat = eq1_calc(sorta,a,b,l,st)			
 		end
@@ -42,10 +42,10 @@ class AppleController < ApplicationController
 			logger.debug(params)
 			# "sorta"=>"2", "treatment"=>"3", "param_L"=>"2", "param_a"=>"4", "param_b"=>"3", "param_ST"=>"5"}
 			sorta = params[:sorta].to_i
-			a = params[:param_a].to_f
-			b = params[:param_b].to_f
-			l = params[:param_L].to_f
-			st= params[:param_ST].to_f
+			a = params[:param_a].to_f == 0.0 ? (10.0**-14).to_f : params[:param_a].to_f
+			b = params[:param_b].to_f == 0.0 ? (10.0**-14).to_f : params[:param_b].to_f
+			l = params[:param_L].to_f == 0.0 ? (10.0**-14).to_f : params[:param_L].to_f
+			st= params[:param_ST].to_f== 0.0 ? (10.0**-14).to_f : params[:param_ST].to_f
 			treatment = params[:treatment].to_i
 
 			@rezultat = eq4_calc(sorta,a,b,l,st,treatment)
@@ -67,7 +67,7 @@ private
 	def eq1_calc(sorta, a,b,l,st)
 		# log(E) = -0.021 - 1,264 * log(L*) + 0.152*log(a*) + 2.070*log(b*) + 0.025*log(ST) + 0.179*(ID_GLO)+0.070*(GD_CP)
 		logger.debug("#{sorta}, #{a}, #{b},#{l},#{st}")
-		log_E = -0.021 - 1.264*Math.log10(l) + 0.152*Math.log10(a) + 2.070*Math.log10(b) + 0.025*Math.log10(st) + 0.179*( sorta == 1 ? 1.0 : 0) + 0.07*( sorta == 2 ? 1.0 : 0)		
+		log_E = -0.021 - 1.264*Math.log10(l.abs()) + 0.152*Math.log10(a.abs()) + 2.070*Math.log10(b.abs()) + 0.028*Math.log10(st.abs()) + 0.179*( sorta == 1 ? 1.0 : 0) + 0.07*( sorta == 2 ? 1.0 : 0)		
 		((10**log_E)<0 ? 0.0 : (10**log_E)).round(2)
 	end
 
@@ -96,9 +96,9 @@ private
 
 	def eq4_calc(sorta,a,b,l,st,treatment)
 		log_E = -0.952 +
-				0.497*Math.log10(l) +
+				0.497*Math.log10(l.abs()) +
 				0.084*a +
-				0.434*Math.log10(b) -
+				0.434*Math.log10(b.abs()) -
 				0.050*( sorta == 1 ? 1.0 : 0) +
 				0.003*st +
 				0.193*(treatment == 1 ? 1 : 0) +
