@@ -1,17 +1,20 @@
 require 'fileutils'
 require "csv"
 
-class JagodeController < ApplicationController
+class StrawberryController < ApplicationController
+	layout "strawberry.html.erb"
 
 	def index
-		if request.post?
-		#formula iz parametara
-		#logger.debug(params[:param1])
-		#formula
-		@tac = 273.63 - 55.23*(params[:sorta].to_i) + 78.22*(params[:tip].to_i) - 14.96*params[:param_a].to_f + 12.32*params[:param_b].to_f
-		@rezultat = @tac>0 ? @tac.round(2) : 0
-		end
+	end
 
+	def eq1
+		if request.post?
+			#formula iz parametara
+			#logger.debug(params[:param1])
+			#formula
+			@tac = 273.63 - 55.23*(params[:sorta].to_i) + 78.22*(params[:tip].to_i) - 14.96*params[:param_a].to_f + 12.32*params[:param_b].to_f
+			@rezultat = @tac>0 ? @tac.round(2) : 0
+		end
 	end
 
 	def calculate(sorta, tip, param_a, param_b)
@@ -28,9 +31,9 @@ class JagodeController < ApplicationController
 
 	def file_upload
 	  
-	  tmp = params[:file_upload][:my_file].tempfile
+	  	return if params[:file_upload].nil? ||  params[:file_upload][:my_file].nil?
+		tmp = params[:file_upload][:my_file].tempfile	 	
 
-		
 		parsed_file = CSV.read(tmp, { :col_sep => "\t" })
 		
 		@result =[]

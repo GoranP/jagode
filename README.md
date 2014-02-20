@@ -1,4 +1,4 @@
-jagode
+strawberry
 ======
 
-TAC za jagode
+TAC za strawberry

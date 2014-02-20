@@ -8,9 +8,18 @@ class AppleController < ApplicationController
 		render :layout => "application"
 	end
 	
-	def team_members
-		render :layout => "team_members"
+	def contact
 	end
+	
+	def send_mail_to_contact
+		logger.debug(params)
+		name = params[:name]
+		email = params[:email]
+		body = params[:message]
+		ContactMailer.contact_email(name, email, body).deliver
+		redirect_to  "/apple/contact", notice: 'Message sent'
+	end			
+
 
 	def eq1
 		if request.post?
@@ -67,10 +76,10 @@ private
 	def eq1_calc(sorta, a,b,l,st)
 		# log(E) = -0.021 - 1,264 * log(L*) + 0.152*log(a*) + 2.070*log(b*) + 0.025*log(ST) + 0.179*(ID_GLO)+0.070*(GD_CP)
 		logger.debug("#{sorta}, #{a}, #{b},#{l},#{st}")
-		log_E = -0.021 - 1.264*Math.log10(l.abs())*sign(l) + 
-				0.152*Math.log10(a.abs())*sign(a) + 
-				2.070*Math.log10(b.abs())*sign(b) + 
-				0.028*Math.log10(st.abs())*sign(st) + 0.179*( sorta == 1 ? 1.0 : 0) + 0.07*( sorta == 2 ? 1.0 : 0)		
+		log_E = -0.0212338 - 1.2458245*Math.log10(l.abs())*sign(l) + 
+				0.1522010*Math.log10(a.abs())*sign(a) + 
+				2.0701140*Math.log10(b.abs())*sign(b) + 
+				0.0279284*Math.log10(st.abs())*sign(st) + 0.1790212*( sorta == 1 ? 1.0 : 0) + 0.0703534*( sorta == 2 ? 1.0 : 0)		
 		((10**log_E)<0 ? 0.0 : (10**log_E))
 	end
 
@@ -98,16 +107,16 @@ private
 	end
 
 	def eq4_calc(sorta,a,b,l,st,treatment)
-		log_E = -0.952 +
-				0.497*Math.log10(l.abs())*sign(l) +
-				0.084*a +
-				0.434*Math.log10(b.abs())*sign(b) -
-				0.050*( sorta == 1 ? 1.0 : 0) +
-				0.003*st +
-				0.193*(treatment == 1 ? 1 : 0) +
-				0.056*(treatment == 2 || treatment == 6 ? 1 : 0) +
-				0.052*(treatment == 3 || treatment == 4 ? 1 : 0) -
-				0.103*(treatment == 5 || treatment == 7 ? 1 : 0)
+		log_E = -0.9516290 +
+				0.4970653*Math.log10(l.abs())*sign(l) +
+				0.0844496*a +
+				0.4340609*Math.log10(b.abs())*sign(b) -
+				0.0497866*( sorta == 1 ? 1.0 : 0) +
+				0.0031467*st +
+				0.1927563*(treatment == 1 ? 1 : 0) +
+				0.0560170*(treatment == 2 || treatment == 6 ? 1 : 0) +
+				0.0515578*(treatment == 3 || treatment == 4 ? 1 : 0) -
+				0.1026755*(treatment == 5 || treatment == 7 ? 1 : 0)
 		((10**log_E)<0 ? 0.0 : (10**log_E))
 	end
 

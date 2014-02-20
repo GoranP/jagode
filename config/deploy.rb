@@ -3,7 +3,7 @@ require 'bundler/capistrano'
 
 server "strawberry.pbf.hr", :app, :web, :db, :primary => true
 
-set :application, "jagode"
+set :application, "strawberry"
 set :repository,  "https://github.com/GoranP/jagode.git"
 set :scm, "git"
 set :user, "goran"  # The server's user for deploys

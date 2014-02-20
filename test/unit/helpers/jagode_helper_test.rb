@@ -1,4 +1,4 @@
 require 'test_helper'
 
-class JagodeHelperTest < ActionView::TestCase
+class StrawberryHelperTest < ActionView::TestCase
 end

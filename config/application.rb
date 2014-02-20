@@ -11,6 +11,17 @@ end
 
 module Strawberry
   class Application < Rails::Application
+
+    # ActionMailer::Base.smtp_settings = {
+    # address: 'smtp.mandrillapp.com',
+    # port: 587,
+    # user_name: ENV['MANDRILL_USERNAME'],
+    # password: ENV['MANDRILL_APIKEY']
+    # }
+    config.action_mailer.delivery_method = :sendmail
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.raise_delivery_errors = true
+    
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

@@ -57,10 +57,10 @@ Strawberry::Application.routes.draw do
 
   
   match "/" => 'apple#index', :via => [:get, :post], :constraints => {:host => 'apple.pbf.hr'}
-  match "/" => 'jagode#index', :via => [:get, :post], :constraints => {:host => 'strawberry.pbf.hr'}  
+  match "/" => 'strawberry#index', :via => [:get, :post], :constraints => {:host => 'strawberry.pbf.hr'}  
   
   
-  root :to => 'apple#welcome'
+  root :to => 'welcome#index'
 
   match ':controller(/:action)',:via => [:get, :post]
 
