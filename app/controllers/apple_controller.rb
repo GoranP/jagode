@@ -71,7 +71,7 @@ private
 				0.152*Math.log10(a.abs())*sign(a) + 
 				2.070*Math.log10(b.abs())*sign(b) + 
 				0.028*Math.log10(st.abs())*sign(st) + 0.179*( sorta == 1 ? 1.0 : 0) + 0.07*( sorta == 2 ? 1.0 : 0)		
-		((10**log_E)<0 ? 0.0 : (10**log_E)).round(2)
+		((10**log_E)<0 ? 0.0 : (10**log_E))
 	end
 
 	def eq23_calc(sorta,formula)		
@@ -94,7 +94,7 @@ private
 					0.517*( sorta == 5 ? 1.0 : 0) -
 					0.380*( sorta == 6 ? 1.0 : 0)			
 		end
-		ssc.round(2)
+		ssc
 	end
 
 	def eq4_calc(sorta,a,b,l,st,treatment)
@@ -108,7 +108,7 @@ private
 				0.056*(treatment == 2 || treatment == 6 ? 1 : 0) +
 				0.052*(treatment == 3 || treatment == 4 ? 1 : 0) -
 				0.103*(treatment == 5 || treatment == 7 ? 1 : 0)
-		((10**log_E)<0 ? 0.0 : (10**log_E)).round(2)
+		((10**log_E)<0 ? 0.0 : (10**log_E))
 	end
 
 	def eq5_calc(sorta,treatment)
@@ -119,7 +119,7 @@ private
 				0.758*(treatment == 3 || treatment == 4 ? 1 : 0) -
 				1.892*(treatment == 5  ? 1 : 0)
 		
-		((e)<0 ? 0.0 : (e)).round(2)
+		((e)<0 ? 0.0 : (e))
 	end
 
 	def sign(a)

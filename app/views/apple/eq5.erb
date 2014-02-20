@@ -34,7 +34,8 @@
 <br>
 <% unless @rezultat.nil? %>
 <br>Color change is: 
-<div style="color:red">ΔE*ab = <%= number_with_precision @rezultat,:precision=>2  %> </div>
+<div style="color:red">ΔE*ab = <%= number_with_precision @rezultat,:precision=>2  %> <small>(<%=@rezultat%>)</small> </div>
+
 <% end %>
 <br>
 <%= submit_tag('Calculate') %>

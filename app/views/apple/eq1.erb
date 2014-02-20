@@ -42,7 +42,8 @@
 <% unless @rezultat.nil? %>
 <tr>
 	<td>Color change is: </td>
-	<td><strong><div style="color:red">ΔE*ab = <%= number_with_precision @rezultat,:precision=>2  %></div></strong></td>
+	<td><strong><div style="color:red">ΔE*ab = <%= number_with_precision @rezultat,:precision=>2  %> <small>(<%=@rezultat%>)</small></div></strong> 		
+	</td>
 </tr>
 <% end %>
 
