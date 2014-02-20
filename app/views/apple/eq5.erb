@@ -1,4 +1,55 @@
-<h2>Sensory Evaluation - treated apples</h2>
+<head>
+	<style type="text/css" media="screen">
+		html, body, div, header, footer, aside, nav, article, section	{ margin: 0; padding: 0; }
+		header, footer, aside, nav, article, section	{ display: block; }
+		body 			{ color: #333; font: 12px Helvetica, Arial, sans-serif; line-height: 18px; }
+		h2				{ color: #333; }
+		a				{ color: #337810; }
+		p				{ margin: 0 0 18px; }
+		#wrapper		{ float: left; width: 100%; margin-left: -33%; }
+		
+		/* Header */
+		header			{ background: #333; border-bottom: 2px solid #aaa; }
+		header h1  	{ color: #fff; margin: 0 0 3px; padding: 24px 18px 0; }
+		header p		{ color: #ccc; font-size: 11px; font-weight: bold; padding: 0 18px; }
+		
+		/* Content Style */
+		nav		{ border-bottom: 1px solid #ccc; padding-right: 18px; }
+		nav ul	{ padding: 0 18px 9px; }
+		#extra			{ border-bottom: 1px solid #ccc; padding-right: 18px; }
+		#extra small	{ font-size: 11px; line-height: 18px; }
+		#content p, #extra p { padding-right: 18px; }
+		
+		/* Content Positioning and Size */
+		nav		{ float: right; width: 30%; }
+		#content		{ margin-left: 34.3%; }
+		#extra			{ float: right; clear: right; width: 30%; }		/* Footer */
+		footer			{ background: #666; border-bottom: 2px solid #aaa; clear: both; width: 100%; }
+		footer a		{ color: #fff; }
+		footer	p		{ color: #ccc; margin: 0; padding: 0 18px 10px; }
+		footer ul		{ border-bottom: 1px solid #999; list-style: none; margin: 0 18px 6px; padding: 10px 0 6px; }
+		footer li		{ display: inline; font-size: 11px; font-weight: bold; padding-right: 5px; }
+	</style>
+	<!--[if IE]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	
+</head>
+
+<div id="container">
+		<header>
+
+			<h1>CAPPABLE</h1>
+			<p class="description">Sensory Evaluation of treated apples
+			   <%= link_to image_tag("home2.png", size: "63x63", :border=>"0", :align=>"right"), 'welcome', :alt=>"Home", :title=>"Home"%>
+			</p>
+
+		</header>
+	<div id="wrapper">
+	<section id="content">
+
+
+<h2>Calculate sensory evaluation of apples treated with various anti-browning treatments</h2>
 <br>
 <strong>Select apple cultivar:</strong>
 <br>
@@ -39,23 +90,32 @@
 <% end %>
 <br>
 <%= submit_tag('Calculate') %>
+</section>
+</div>
 
-<br>
-<br>
-<br>
-<small>
-<strong>Sensory evaluation meaning:</strong><br>
-S.Ev. = 1.0 – 1.9 extremely unfavorable<br>
-S.Ev. = 2.0 – 2.9 highly unfavorable<br>
-S.Ev. = 3.0 – 3.9 moderately unfavorable<br>
-S.Ev. = 4.0 – 4.9 neither favorable nor unfavorable<br>
-S.Ev. = 5.0 – 5.9 moderately favorable<br>
-S.Ev. = 6.0 – 6.9 highly favorable<br>
-S.Ev. = 7.0 extremely favorable<br>
-</small>
-<br>
-<small>
-<br>
-References:<br>
-Yang, Y.M., J. Yu, N., (2012). Color Image Quality Assessment Based on CIEDE2000. Advances in Multimedia 2012, 1-7.<br>
-<small>
+<nav>			
+	<h2><b>MODELS:</b></h2>
+	<ul>
+		<h4><b>NON-TREATED APPLES</b></h4>
+		<li><a href="/apple/eq1">Browning (CIELab) over storage time</a></li>
+		<li><a href="/apple/eq2">Soluble solids content</a></li>
+		<li><a href="/apple/eq2">pH</a></li>			
+		<h4><b>TREATED APPLES</b></h4>
+		<li><a href="/apple/eq4">Browning (CIELab) over storage time</a></li>
+		<li><a href="/apple/eq5">Sensory Evaluation</a></li>			
+	</ul>
+</nav>
+
+<section id="extra">
+			<h3>Sensory evaluation meaning:</h3>
+			<p> S.Ev. = 1.0 – 1.9 extremely unfavorable<br>
+				S.Ev. = 2.0 – 2.9 highly unfavorable<br>
+                S.Ev. = 3.0 – 3.9 moderately unfavorable<br>
+                S.Ev. = 4.0 – 4.9 neither favorable nor unfavorable<br>
+                S.Ev. = 5.0 – 5.9 moderately favorable<br>
+                S.Ev. = 6.0 – 6.9 highly favorable<br>
+                S.Ev. = 7.0 extremely favorable<br>
+	<br>
+	<b>Reference:</b>
+	Aguayo, E., Requejo-Jackman, C., Stanley, R., Woolf, A., (2010). Effects of calcium ascorbate treatments and storage atmosphere on antioxidant activity and quality of fresh-cut apple slices. Postharvest Biology and Technology 57(1), 52-60.</p>		
+</section>
