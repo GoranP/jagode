@@ -45,56 +45,36 @@
 <body>
 	<div id="container">
 		<header>
-			<h1>WELCOME</h1>
+			<h1>Contact us</h1>
 			
-			<p class="description">ENGINEERING PORTAL 
+			<p class="description">Send us comments
 			<%= link_to image_tag("gears2.png", size: "90x90", :alt=>"Engineering portal", :border=>"0", :align=>"right"), '/', 
 					:alt=>"Home", :title=>"Home" %>
 			</p>
 		</header>
-		<div id="wrapper">
-			<section id="content">
-				<h2>Please select application:</h2>
-				<p><div align="justify">Please find below complete list of mathematical models embedded in on-line applications.</div></p>
-			
-			<BR>
-			<BR>
-			
-			<table>
-   			<tr>
-			<td valign="top">
-			<%= link_to image_tag("apple_portal.jpg", size: "72x70", :alt=>"CAPPABLE", :border=>"0", :align=>"left", :verticalalign=>"middle"), '/apple',  :alt=>"CAPPABLE", :title=>"CAPPABLE" %>		
+<div id="wrapper">
+<section id="content">
 
-			<td valign="middle"><font size="3"><%= link_to "Anti-browning Apple Calculator", '/apple' %></font></td>
-			</td>
-			</tr>
-			
-			<tr>
-			<td valign="top">
-			<%= link_to image_tag("strawberry_portal.jpg", size: "72x70", :alt=>"Total anthocyans content calculator", :border=>"0", :align=>"left", :verticalalign=>"middle"), '/strawberry',  :title=>"Total anthocyans content calculator" %>		
-
-
-			<td valign="middle"><font size="3"><%= link_to "Total anthocyans content calculator", '/strawberry' %></font></td>
-			
-			</td>
-			</tr>
-			</table>					
-			
-			<BR>
-			<BR>
-			<BR>
-			<BR>
-			<BR>
-		
-		</section>
-		</div>
+<h2>Contact us</h2>
+    
+    <p><div align="justify">    
+	    <form action="/contact/send_mail_to_contact" method="POST" enctype="multipart/form-data">
+	    <input type="hidden" name="action" value="submit"/> Your name:<br />
+	    <input name="name" type="text" value="" size="30"/> <br /> Your email:<br />
+	    <input name="email" type="text" value="" size="30"/> <br /> Your message:<br />
+	    <textarea name="message" rows="7" cols="30"> </textarea> <br />
+	    <input type="submit" value="Send email"/>
+    </form> 
+	</div></p>
+</section>
+</div>
 		
 		
 		<footer>
 				<ul>
 				<font size="2"><b>This site is brought to you by:</b></font><br>
-				<li><a href="CV/GP.pdf">Goran Pizent, M.Sc.|</a></li>
-				<li><a href="CV/PP.pdf">Predrag Putnik, Ph.D.|</a></li>
+				<li><a href="/CV/GP.pdf">Goran Pizent, M.Sc.|</a></li>
+				<li><a href="/CV/PP.pdf">Predrag Putnik, Ph.D.|</a></li>
 								
 				<li><%= link_to image_tag("contact2.png", size: "25x25"), '/contact', :alt=>"Contact us", :title=>"Contact us", :border=>"0" %></li>
 				</ul>

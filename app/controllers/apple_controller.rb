@@ -3,22 +3,6 @@ class AppleController < ApplicationController
 	
 	def index
 	end
-	
-	def welcome
-		render :layout => "application"
-	end
-	
-	def contact
-	end
-	
-	def send_mail_to_contact
-		logger.debug(params)
-		name = params[:name]
-		email = params[:email]
-		body = params[:message]
-		ContactMailer.contact_email(name, email, body).deliver
-		redirect_to  "/apple/contact", notice: 'Message sent'
-	end			
 
 
 	def eq1
