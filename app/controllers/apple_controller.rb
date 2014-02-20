@@ -67,7 +67,10 @@ private
 	def eq1_calc(sorta, a,b,l,st)
 		# log(E) = -0.021 - 1,264 * log(L*) + 0.152*log(a*) + 2.070*log(b*) + 0.025*log(ST) + 0.179*(ID_GLO)+0.070*(GD_CP)
 		logger.debug("#{sorta}, #{a}, #{b},#{l},#{st}")
-		log_E = -0.021 - 1.264*Math.log10(l.abs()) + 0.152*Math.log10(a.abs()) + 2.070*Math.log10(b.abs()) + 0.028*Math.log10(st.abs()) + 0.179*( sorta == 1 ? 1.0 : 0) + 0.07*( sorta == 2 ? 1.0 : 0)		
+		log_E = -0.021 - 1.264*Math.log10(l.abs())*sign(l) + 
+				0.152*Math.log10(a.abs())*sign(a) + 
+				2.070*Math.log10(b.abs())*sign(b) + 
+				0.028*Math.log10(st.abs())*sign(st) + 0.179*( sorta == 1 ? 1.0 : 0) + 0.07*( sorta == 2 ? 1.0 : 0)		
 		((10**log_E)<0 ? 0.0 : (10**log_E)).round(2)
 	end
 
@@ -96,9 +99,9 @@ private
 
 	def eq4_calc(sorta,a,b,l,st,treatment)
 		log_E = -0.952 +
-				0.497*Math.log10(l.abs()) +
+				0.497*Math.log10(l.abs())*sign(l) +
 				0.084*a +
-				0.434*Math.log10(b.abs()) -
+				0.434*Math.log10(b.abs())*sign(b) -
 				0.050*( sorta == 1 ? 1.0 : 0) +
 				0.003*st +
 				0.193*(treatment == 1 ? 1 : 0) +
@@ -119,4 +122,7 @@ private
 		((e)<0 ? 0.0 : (e)).round(2)
 	end
 
+	def sign(a)
+		(a<0 ? -1 : 1)
+	end
 end
