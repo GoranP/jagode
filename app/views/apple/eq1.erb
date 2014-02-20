@@ -40,9 +40,9 @@
 		<header>
 
 			<h1>CAPPABLE</h1>
-			<p class="description">Browning of non-treated apples over storage time<a href="index.html">
-			<%= link_to image_tag("home2.png", size: "63x63", :border=>"0", :align=>"right"), 'welcome', :alt=>"Home", :title=>"Home"%>
-			</a></p>
+			<p class="description">Browning of non-treated apples over storage time
+			   <%= link_to image_tag("home2.png", size: "63x63", :border=>"0", :align=>"right"), '/', :alt=>"Home", :title=>"Home"%>
+			</p>
 
 		</header>
 
@@ -102,17 +102,16 @@
 <td><%= label_tag(:ST,"ST") %></td>
 <td><%= text_field_tag(:param_ST) %> <%= label_tag(:ST_H,"[h]") %></td>
 </tr>
+</table>
 
 <% unless @rezultat.nil? %>
-<tr>
-
-	<td>Color change is: </td>
-	<td><strong><div style="color:red">ΔE*ab = <%= number_with_precision @rezultat,:precision=>2  %> <small>(<%=@rezultat%>)</small></div></strong> 		
-	</td>
-</tr>
+	Color change is: 
+	<strong>
+		<div style="color:red">ΔE*ab = <%= number_with_precision @rezultat,:precision=>2  %> <small>(<%=@rezultat%>)</small></div>
+	</strong> 
 <% end %>
 
-</table>
+
 
 <%= submit_tag('Calculate') %>
 <br>

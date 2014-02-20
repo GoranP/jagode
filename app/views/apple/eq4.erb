@@ -41,7 +41,7 @@
 
 			<h1>CAPPABLE</h1>
 			<p class="description">Browning of treated apples over storage time
-			   <%= link_to image_tag("home2.png", size: "63x63", :border=>"0", :align=>"right"), 'welcome', :alt=>"Home", :title=>"Home"%>
+			   <%= link_to image_tag("home2.png", size: "63x63", :border=>"0", :align=>"right"), '/', :alt=>"Home", :title=>"Home"%>
 			</p>
 
 		</header>
@@ -108,7 +108,6 @@
 <strong><div style="color:red">ΔE*ab = <%= number_with_precision @rezultat,:precision=>2  %> <small>(<%=@rezultat%>)</small></div></strong>
 
 <% end %>
-<br>
 <br>
 <%= submit_tag('Calculate') %>
 </section>
