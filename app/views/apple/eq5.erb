@@ -63,7 +63,6 @@
 <%= label_tag(:cultivars,'Cripps Pink') %>
 <br>
 
-----
 <br>
 <strong>Select anti-browning treatment:</strong>
 <br>
@@ -86,7 +85,9 @@
 <% unless @rezultat.nil? %>
 <br>Color change is: 
 <strong>
-	<div style="color:red">ΔE*ab = <%= number_with_precision @rezultat,:precision=>2  %> <small>(<%=@rezultat%>)</small> </div>
+	<div style="color:red">ΔE*ab = <%= number_with_precision @rezultat,:precision=>2  %> 
+	
+	</div>
 </strong>
 <% end %>
 <br>

@@ -92,11 +92,15 @@
 
 <% if @formula == 2 %> 
 	Soluble solids content: <br>
-	<strong><div style="color:red">SSC = <%= number_with_precision @rezultat,:precision=>2  %> [°Bx] <small>(<%=@rezultat%>)</small> </div></strong>
+	<strong><div style="color:red">SSC = <%= number_with_precision @rezultat,:precision=>2  %> [°Bx] 
+	
+	</div></strong>
 	
 <% else %>
 	pH: <br>
-	<strong><div style="color:red">pH = <%= number_with_precision @rezultat,:precision=>2  %> <small>(<%=@rezultat%>)</small></div></strong>	
+	<strong><div style="color:red">pH = <%= number_with_precision @rezultat,:precision=>2  %> 
+	
+	</div></strong>	
 <% end %>
 <% end %>
 <br>

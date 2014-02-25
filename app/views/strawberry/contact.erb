@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
+
 <head>
 	<meta charset="utf-8">
     <meta name="Description" content="WELCOME">
     <meta name="" content="">
     <meta name="">
-	<title>ENGINEERING PORTAL</title>
+	<title>WELCOME</title>
 	<style type="text/css" media="screen">
 		html, body, div, header, footer, aside, nav, article, section	{ margin: 0; padding: 0; }
 		header, footer, aside, nav, article, section	{ display: block; }
@@ -42,32 +42,34 @@
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 </head>
-<body>
-	<div id="container">
+<div id="container">
 		<header>
-			<h1>Contact us</h1>
-			
-			<p class="description">Send us comments
-			<%= link_to image_tag("gears2.png", size: "90x90", :alt=>"Engineering portal", :border=>"0", :align=>"right"), '/', 
-					:alt=>"Home", :title=>"Home" %>
+			<h1>TAC</h1>
+			<p class="description">Total anthocyans content calculator for different strawberry cultivars
+			<%= link_to image_tag("home2.png", size: "63x63", :border=>"0", :align=>"right"), '/', :alt=>"Home", :title=>"Home"%>
 			</p>
-		</header>
-<div id="wrapper">
-<section id="content">
 
-<h2>Contact us</h2>
-    
-    <p><div align="justify">    
-	    <form action="/contact/send_mail_to_contact" method="POST" enctype="multipart/form-data">
+		</header>
+		<div id="wrapper">
+			<section id="content">
+				<h2>Contact us</h2>
+				<p>
+				<div align="justify">    
+
+    <div align="justify">    
+	    <form action="send_mail_to_contact" method="POST" enctype="multipart/form-data">
 	    <input type="hidden" name="action" value="submit"/> Your name:<br />
 	    <input name="name" type="text" value="" size="30"/> <br /> Your email:<br />
 	    <input name="email" type="text" value="" size="30"/> <br /> Your message:<br />
 	    <textarea name="message" rows="7" cols="30"> </textarea> <br />
 	    <input type="submit" value="Send email"/>
     </form> 
-	</div></p>
+	</div>
+
+	</p>
 </section>
 </div>
+
 	<table>
 		<tr>
 	
@@ -82,18 +84,8 @@
 	</td>
 	</tr>			
 	</table>
-		
-	
-	<footer>
-			<ul>
-			<font size="2"><b>This site is brought to you by:</b></font><br>
-			<li><a href="/CV/GP.pdf">Goran Pizent, M.Sc.|</a></li>
-			<li><a href="/CV/PP.pdf">Predrag Putnik, Ph.D.|</a></li>
-							
-			<li><%= link_to image_tag("contact2.png", size: "25x25"), '/contact', :alt=>"Contact us", :title=>"Contact us", :border=>"0" %></li>
-			</ul>
-		<p>Copyright © Faculty of Food Technology and Biotechnology - University of Zagreb, 2014. All rights reserved.</p>
-	</footer>
+
+
 </div>
-</body>
-</html>
+
+

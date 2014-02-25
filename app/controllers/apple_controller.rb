@@ -4,6 +4,17 @@ class AppleController < ApplicationController
 	def index
 	end
 
+	def contact
+	end
+
+	def send_mail_to_contact
+		logger.debug(params)
+		name = params[:name]
+		email = params[:email]
+		body = params[:message]
+		ContactMailer.contact_email(name, email, body,"CAPPABLE").deliver
+		redirect_to  :action=>"contact"
+	end			
 
 	def eq1
 		if request.post?

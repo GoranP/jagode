@@ -8,7 +8,7 @@ class ContactController < ApplicationController
 		name = params[:name]
 		email = params[:email]
 		body = params[:message]
-		ContactMailer.contact_email(name, email, body).deliver
+		ContactMailer.contact_email(name, email, body, "Portal").deliver
 		redirect_to  "/contact", notice: 'Message sent'
 	end			
 
