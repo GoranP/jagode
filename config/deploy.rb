@@ -28,11 +28,15 @@ set :ssh_options, { :forward_agent => true }
 
 # if you want to clean up old releases on each deploy uncomment this:
 after "deploy:restart", "deploy:cleanup"
+after "deploy:update_code", "deploy:symlink_config"
 
 namespace :deploy do
    task :start do ; end
    task :stop do ; end
    task :restart, :roles => :app, :except => { :no_release => true } do
      run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+   end
+   task :symlink_config do
+   	run "ln -nfs #{shared_path}/config/mail.yml #{latest_release}/config/mail.yml"
    end
  end
