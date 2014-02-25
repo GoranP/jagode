@@ -28,7 +28,7 @@ set :ssh_options, { :forward_agent => true }
 
 # if you want to clean up old releases on each deploy uncomment this:
 after "deploy:restart", "deploy:cleanup"
-after "deploy:update_code", "deploy:symlink_config"
+before "deploy:assets:precompile", "deploy:symlink_config"
 
 namespace :deploy do
    task :start do ; end
