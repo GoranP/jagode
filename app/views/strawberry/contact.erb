@@ -57,7 +57,7 @@
 				<div align="justify">    
 
     <div align="justify">    
-	    <form action="send_mail_to_contact" method="POST" enctype="multipart/form-data">
+	    <form action="contact" method="POST" enctype="multipart/form-data">
 	    <input type="hidden" name="action" value="submit"/> Your name:<br />
 	    <input name="name" type="text" value="" size="30"/> <br /> Your email:<br />
 	    <input name="email" type="text" value="" size="30"/> <br /> Your message:<br />
@@ -65,7 +65,7 @@
 	    <input type="submit" value="Send email"/>
     </form> 
 	</div>
-
+	<div id="notice"><strong><%= @notice %></strong></div>
 	</p>
 </section>
 </div>

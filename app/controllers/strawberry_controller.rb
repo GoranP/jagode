@@ -8,16 +8,16 @@ class StrawberryController < ApplicationController
 	end
 
 	def contact
+		if request.post?
+			logger.debug(params)
+			name = params[:name]
+			email = params[:email]
+			body = params[:message]
+			ContactMailer.contact_email(name, email, body, "TAC").deliver
+			@notice = "Your email has been sent successfully! Thanks."
+		end
 	end
 
-	def send_mail_to_contact
-		logger.debug(params)
-		name = params[:name]
-		email = params[:email]
-		body = params[:message]
-		ContactMailer.contact_email(name, email, body, "TAC").deliver
-		redirect_to  :action=>"contact"
-	end			
 
 	def eq1
 		if request.post?
