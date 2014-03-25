@@ -66,7 +66,51 @@ class AppleController < ApplicationController
 		end		
 	end
 
+	def st
+		#{ "sorta"=>"1", "treatement"=>"1", "param_L"=>"", "param_a"=>"", "param_b"=>"", "param_c"=>"", "param_ph"=>"", "param_ssc"=>"", "param_seval"=>"", 
+		#  "param_tx"=>"", "param_delta_e"=>"", "legal"=>"0", "param_ebac"=>"", "param_amb"=>""
+		if request.post?
+			logger.debug(params)
+
+			sorta 		= params[:sorta].to_i
+			treatment 	= params[:treatment].to_i
+			l 		 	= params[:param_L].to_f
+			a 			= params[:param_a].to_f
+			b 			= params[:param_b].to_f
+			c 			= params[:param_c].to_f
+			pH			= params[:param_pH].to_i
+			ssc			= params[:param_ssc].to_i
+			seval		= params[:param_seval].to_f == 0.0 ? (10.0**-14).to_f : params[:param_seval].to_f
+			tx 			= params[:param_tx].to_f == 0.0 ? (10.0**-14).to_f : params[:param_tx].to_f
+			delta_e		= params[:param_delta_e].to_f
+			legal		= params[:param_legal].to_i
+			ebac		= params[:param_ebac].to_f == 0.0 ? (10.0**-14).to_f : params[:param_ebac].to_f
+			amb			= params[:param_amb].to_f == 0.0 ? (10.0**-14).to_f : params[:param_amb].to_f
+			@rezultat = st_calc(l,a,b,c,pH,ssc,seval,tx,delta_e,sorta,treatment)
+			st = legal == 1 ? st_legal(ebac) : st_spoiled(amb)
+			@rezultat_delta = st - @rezultat
+		end		
+	end
+
 private
+	
+
+	def st_calc(l,a,b,c,pH,ssc,seval,tX,dE,gD,noTR)
+		st = 	139.22516 -0.19282*l + 1.18667*a + 10.12652*b - 10.19815*c - 20.15348*pH 
+				-1.38471*ssc - 7.19258*Math.log(seval) -4.48949*Math.log(tX)
+				+ 10**(Math.log((dE- 1.16645).abs)) + 4.44313*gD + 2.46953*noTR
+
+	end
+
+	def st_spoiled (amb)
+		st_spoiled = -3.90 +2.07*Math.log(amb)
+	end
+
+	def st_legal(ebac)
+		st_legal = -0.66 + 3.52*Math.log(ebac)
+	end
+
+
 	def eq1_calc(sorta, a,b,l,st)
 		# log(E) = -0.021 - 1,264 * log(L*) + 0.152*log(a*) + 2.070*log(b*) + 0.025*log(ST) + 0.179*(ID_GLO)+0.070*(GD_CP)
 		logger.debug("#{sorta}, #{a}, #{b},#{l},#{st}")

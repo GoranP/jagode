@@ -1,0 +1,223 @@
+<head>
+	<style type="text/css" media="screen">
+		html, body, div, header, footer, aside, nav, article, section	{ margin: 0; padding: 0; }
+		header, footer, aside, nav, article, section	{ display: block; }
+		body 			{ color: #333; font: 12px Helvetica, Arial, sans-serif; line-height: 18px; }
+		h2				{ color: #333; }
+		a				{ color: #337810; }
+		p				{ margin: 0 0 18px; }
+		#wrapper		{ float: left; width: 100%; margin-left: -33%; }
+		
+		/* Header */
+		header			{ background: #333; border-bottom: 2px solid #aaa; }
+		header h1  	{ color: #fff; margin: 0 0 3px; padding: 24px 18px 0; }
+		header p		{ color: #ccc; font-size: 11px; font-weight: bold; padding: 0 18px; }
+		
+		/* Content Style */
+		nav		{ border-bottom: 1px solid #ccc; padding-right: 18px; }
+		nav ul	{ padding: 0 18px 9px; }
+		#extra			{ border-bottom: 1px solid #ccc; padding-right: 18px; }
+		#extra small	{ font-size: 11px; line-height: 18px; }
+		#content p, #extra p { padding-right: 18px; }
+		
+		/* Content Positioning and Size */
+		nav		{ float: right; width: 30%; }
+		#content		{ margin-left: 34.3%; }
+		#extra			{ float: right; clear: right; width: 30%; }		/* Footer */
+		footer			{ background: #666; border-bottom: 2px solid #aaa; clear: both; width: 100%; }
+		footer a		{ color: #fff; }
+		footer	p		{ color: #ccc; margin: 0; padding: 0 18px 10px; }
+		footer ul		{ border-bottom: 1px solid #999; list-style: none; margin: 0 18px 6px; padding: 10px 0 6px; }
+		footer li		{ display: inline; font-size: 11px; font-weight: bold; padding-right: 5px; }
+	</style>
+	<!--[if IE]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	
+</head>
+
+<div id="container">
+		<header>
+
+			<h1>CAPPABLE</h1>
+			<p class="description">Browning of apples over storage time
+			   <%= link_to image_tag("home2.png", size: "63x63", :border=>"0", :align=>"right"), '/', :alt=>"Home", :title=>"Home"%>
+			</p>
+
+		</header>
+
+<div id="wrapper">
+
+<section id="content">
+
+<h2>Calculate ??? </h2>
+<br>
+
+<strong>Select apple cultivar:</strong>
+<br>
+<%= form_tag('/apple/st') %>
+<%= radio_button_tag(:sorta, value = "1", checked = true, options = {})  %>
+<%= label_tag(:cultivars,'Golden Delicious') %>
+<br>
+<%= radio_button_tag(:sorta, value = "0", checked = false, options = {})  %>
+<%= label_tag(:cultivars,'Cripps Pink') %>
+<br>
+
+
+<br>
+<strong>Select anti-browning treatment:</strong>
+<br>
+<%= radio_button_tag(:treatement, value = "1", checked = true, options = {})  %>
+<%= label_tag(:treat,'No treatement') %>
+<br>
+<%= radio_button_tag(:treatement, value = "0", checked = false, options = {})  %>
+<%= label_tag(:treat,'Ascorbic with citric acid') %>
+<br>
+<%= radio_button_tag(:treatement, value = "0", checked = false, options = {})  %>
+<%= label_tag(:treat,'Ca-ascorbate ') %>
+<br>
+<%= radio_button_tag(:treatement, value = "0", checked = false, options = {})  %>
+<%= label_tag(:treat,'Ultrasound (1 min) with Ca-ascorbate') %>
+<br>
+<%= radio_button_tag(:treatement, value = "0", checked = false, options = {})  %>
+<%= label_tag(:treat,'Ultrasound (3 min) with Ca-ascorbate ') %>
+<br>
+<%= radio_button_tag(:treatement, value = "0", checked = false, options = {})  %>
+<%= label_tag(:treat,'Ultrasound (1 min) ascorbic and citric acid ') %>
+<br>
+<%= radio_button_tag(:treatement, value = "0", checked = false, options = {})  %>
+<%= label_tag(:treat,'Ultrasound (3 min) ascorbic and citric acid') %>
+<br>
+<br>
+
+
+<strong>Type in the following:</strong>
+<br>
+
+<table>
+<tr>
+<td><%= label_tag(:L,"L* (0-100)") %></td>
+<td><%= text_field_tag(:param_L) %></td>
+</tr>
+<tr>
+<td><%= label_tag(:a,"a* (∞ ≤a*≤ +∞)") %></td>
+<td><%= text_field_tag(:param_a) %></td>
+</tr>
+<tr>
+<td><%= label_tag(:b,"b* (-∞ ≤b*≤ +∞)") %></td>
+<td><%= text_field_tag(:param_b) %></td>
+</tr>
+<tr>
+<td><%= label_tag(:c,"C* (C*≤0)") %></td>
+<td><%= text_field_tag(:param_c) %></td>
+</tr>
+<tr>
+<td><%= label_tag(:ph,"pH (0-14)") %></td>
+<td><%= text_field_tag(:param_ph) %></td>
+</tr>
+<tr>
+<td><%= label_tag(:ssc,"ssc (SSC≥0)") %></td>
+<td><%= text_field_tag(:param_ssc) %></td>
+</tr>
+<tr>
+<td><%= label_tag(:seval,"Sensory evaluation (1 – 7)") %></td>
+<td><%= text_field_tag(:param_seval) %></td>
+</tr>
+<tr>
+<td><%= label_tag(:tx,"Texture (TX>0)") %></td>
+<td><%= text_field_tag(:param_tx) %> </td>
+</tr>
+<tr>
+<td><%= label_tag(:delta_e,"ΔE*ab (ΔE*ab≥0)") %></td>
+<td><%= text_field_tag(:param_delta_e) %> </td>
+</tr>
+
+</table>
+
+
+<script type="text/javascript">
+
+function legalCheck() {
+    if (document.getElementById('legal').checked) {
+        document.getElementById('params_ebac').style.display = 'block';
+        document.getElementById('params_ebac').style.visibility = 'visible';
+        document.getElementById('params_amb').style.display  = 'none';
+        document.getElementById('params_amb').style.visibility  = 'hidden';
+    } else {
+        document.getElementById('params_amb').style.display = 'block';
+        document.getElementById('params_amb').style.visibility = 'visible';
+        document.getElementById('params_ebac').style.display  = 'none';
+        document.getElementById('params_ebac').style.visibility  = 'hidden';    	
+    }
+};
+
+
+</script>
+
+<body onload="legalCheck()">
+
+<strong>Set limit (M) for for fresh-cut apple<strong>
+
+<br>
+<%= radio_button_tag(:legal, value = "0", checked = true, options = {:id=>'legal', :onclick=>'javascript:legalCheck();'})  %>
+<%= label_tag(:limit,'Legal limit') %>
+
+<%= radio_button_tag(:legal, value = "1", checked = false, options = {:onclick=>'javascript:legalCheck();'})  %>
+<%= label_tag(:treat,'Spoilage limit') %>
+<div id='params_ebac'>	
+	<%= label_tag(:limit,'Enter maximum allowed [cfu/g] Enterobacteriaceae:') %>
+	<%= text_field_tag(:param_ebac) %>	
+</div>
+
+<div id='params_amb'>	
+	<%= label_tag(:limit,'Enter maximum recommended [cfu/g] for Aerobic mesophilic bacteria:') %>
+	<%= text_field_tag(:param_amb) %>
+</div>
+<br>
+<br>
+
+
+<% unless @rezultat.nil? %>
+	Color change is: 
+	<strong>
+		<div style="color:red">
+			STr = <%= number_with_precision @rezultat,:precision=>2  %> days
+			<br>
+			ΔST = <%= number_with_precision @rezultat_delta,:precision=>2  %> days
+		</div>
+	</strong> 
+<% end %>
+
+
+
+<%= submit_tag('Calculate') %>
+<br>
+<br>
+</section>
+</div>
+<nav>			
+	<h2><b>MODELS:</b></h2>
+	<ul>
+		<h4><b>NON-TREATED APPLES</b></h4>
+		<li><a href="/apple/eq1">Browning (CIELab) over storage time</a></li>
+		<li><a href="/apple/eq2">Soluble solids content</a></li>
+		<li><a href="/apple/eq2">pH</a></li>			
+		<h4><b>TREATED APPLES</b></h4>
+		<li><a href="/apple/eq4">Browning (CIELab) over storage time</a></li>
+		<li><a href="/apple/eq5">Sensory Evaluation</a></li>			
+	</ul>
+</nav>
+
+<section id="extra">
+	<h3>Subjective assessment of color difference by unaided average human eye:</h3>
+	<p> &#916E<sup>*</sup><sub>ab</sub> < 0.5 color difference hardly noticeable <br>
+		&#916E<sup>*</sup><sub>ab</sub> = 0.5 – 1.5 slightly noticeable color difference<br>
+		&#916E<sup>*</sup><sub>ab</sub> = 1.5 – 3.0 noticeable color difference<br>
+		&#916E<sup>*</sup><sub>ab</sub> = 3.0 – 6.0 considerable color difference<br>
+		&#916E<sup>*</sup><sub>ab</sub> = 6.0 – 12.0 large color difference<br>
+		&#916E<sup>*</sup><sub>ab</sub> > 12.0 extremely large color difference<br>
+	<br>
+	<b>Reference:</b>
+	Yang, Y.M., J. Yu, N., (2012). Color Image Quality Assessment Based on CIEDE2000. Advances in Multimedia 2012, 1-7. </p>		
+</section>
+</div>
