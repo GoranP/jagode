@@ -82,7 +82,7 @@ class AppleController < ApplicationController
 			ssc			= params[:param_ssc].to_i
 			seval		= params[:param_seval].to_f == 0.0 ? (10.0**-14).to_f : params[:param_seval].to_f
 			tx 			= params[:param_tx].to_f == 0.0 ? (10.0**-14).to_f : params[:param_tx].to_f
-			delta_e		= params[:param_delta_e].to_f
+			delta_e		= params[:param_delta_e].to_f == 0.0 ? (10.0**-14).to_f : params[:param_delta_e].to_f
 			legal		= params[:param_legal].to_i
 			ebac		= params[:param_ebac].to_f == 0.0 ? (10.0**-14).to_f : params[:param_ebac].to_f
 			amb			= params[:param_amb].to_f == 0.0 ? (10.0**-14).to_f : params[:param_amb].to_f
@@ -98,7 +98,7 @@ private
 	def st_calc(l,a,b,c,pH,ssc,seval,tX,dE,gD,noTR)
 		st = 	139.22516 -0.19282*l + 1.18667*a + 10.12652*b - 10.19815*c - 20.15348*pH 
 				-1.38471*ssc - 7.19258*Math.log(seval) -4.48949*Math.log(tX)
-				+ 10**(Math.log((dE- 1.16645).abs)) + 4.44313*gD + 2.46953*noTR
+				+ 1.16645*Math.log(dE.abs()) + 4.44313*gD + 2.46953*noTR
 
 	end
 
