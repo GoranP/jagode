@@ -78,12 +78,12 @@ class AppleController < ApplicationController
 			a 			= params[:param_a].to_f
 			b 			= params[:param_b].to_f
 			c 			= params[:param_c].to_f
-			pH			= params[:param_pH].to_i
-			ssc			= params[:param_ssc].to_i
+			pH			= params[:param_pH].to_f
+			ssc			= params[:param_ssc].to_f
 			seval		= params[:param_seval].to_f == 0.0 ? (10.0**-14).to_f : params[:param_seval].to_f
 			tx 			= params[:param_tx].to_f == 0.0 ? (10.0**-14).to_f : params[:param_tx].to_f
 			delta_e		= params[:param_delta_e].to_f == 0.0 ? (10.0**-14).to_f : params[:param_delta_e].to_f
-			legal		= params[:param_legal].to_i
+			legal		= params[:param_legal].to_f
 			ebac		= params[:param_ebac].to_f == 0.0 ? (10.0**-14).to_f : params[:param_ebac].to_f
 			amb			= params[:param_amb].to_f == 0.0 ? (10.0**-14).to_f : params[:param_amb].to_f
 			@rezultat = st_calc(l,a,b,c,pH,ssc,seval,tx,delta_e,sorta,treatment)
@@ -97,17 +97,17 @@ private
 
 	def st_calc(l,a,b,c,pH,ssc,seval,tX,dE,gD,noTR)
 		st = 	139.22516 -0.19282*l + 1.18667*a + 10.12652*b - 10.19815*c - 20.15348*pH 
-				-1.38471*ssc - 7.19258*Math.log(seval) -4.48949*Math.log(tX)
-				+ 1.16645*Math.log(dE.abs()) + 4.44313*gD + 2.46953*noTR
+				-1.38471*ssc - 7.19258*Math.log10(seval.abs())*sign(seval) -4.48949*Math.log10(tX.abs())*sign(tX)
+				+ 1.16645*Math.log10(dE.abs())*sign(dE) + 4.44313*gD + 2.46953*noTR
 
 	end
 
 	def st_spoiled (amb)
-		st_spoiled = -3.90 +2.07*Math.log(amb)
+		st_spoiled = -3.90 +2.07*Math.log10(amb.abs())*sign(amb)
 	end
 
 	def st_legal(ebac)
-		st_legal = -0.66 + 3.52*Math.log(ebac)
+		st_legal = -0.66 + 3.52*Math.log10(ebac.abs())*sign(ebac)
 	end
 
 
