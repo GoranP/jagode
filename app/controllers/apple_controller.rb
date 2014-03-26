@@ -73,20 +73,23 @@ class AppleController < ApplicationController
 			logger.debug(params)
 
 			sorta 		= params[:sorta].to_i
-			treatment 	= params[:treatment].to_i
+			treatement 	= params[:treatement].to_i
 			l 		 	= params[:param_L].to_f
 			a 			= params[:param_a].to_f
 			b 			= params[:param_b].to_f
 			c 			= params[:param_c].to_f
-			pH			= params[:param_pH].to_f
+			pH			= params[:param_ph].to_f
 			ssc			= params[:param_ssc].to_f
 			seval		= params[:param_seval].to_f == 0.0 ? (10.0**-14).to_f : params[:param_seval].to_f
 			tx 			= params[:param_tx].to_f == 0.0 ? (10.0**-14).to_f : params[:param_tx].to_f
 			delta_e		= params[:param_delta_e].to_f == 0.0 ? (10.0**-14).to_f : params[:param_delta_e].to_f
-			legal		= params[:param_legal].to_f
+			legal		= params[:param_legal].to_i
 			ebac		= params[:param_ebac].to_f == 0.0 ? (10.0**-14).to_f : params[:param_ebac].to_f
 			amb			= params[:param_amb].to_f == 0.0 ? (10.0**-14).to_f : params[:param_amb].to_f
-			@rezultat = st_calc(l,a,b,c,pH,ssc,seval,tx,delta_e,sorta,treatment)
+			
+			logger.debug("treatement #{treatement}")
+			@rezultat = st_calc(l,a,b,c,pH,ssc,seval,tx,delta_e,sorta,treatement)
+			
 			st = legal == 1 ? st_legal(ebac) : st_spoiled(amb)
 			@rezultat_delta = st - @rezultat
 		end		
@@ -94,11 +97,51 @@ class AppleController < ApplicationController
 
 private
 	
+#Intercept	AC	ZL.DELIŠES	REG. Koef	Tretman	Bez tretmana	REG. Koef	L	REG. Koef	a	REG. Koef	b	REG. Koef	C	REG. Koef	pH	REG. Koef	SSC	REG. Koef	LOG S. Eval	REG. Koef	LOG TX	REG. Koef	LOG DE	REG. Koef	DE	ST model	ST exper		STD
+#139,225159	ZL.DELIŠES	1	4,443128	Bez tretmana	1	2,469533	0	-0,192824	0	1,186666	0	10,126525	0	-10,198145	4,19	-20,153478	16,8	-1,384706	0,78	-7,192582	3,75	-4,489493	-14	1,166451	0,00	0	1	1,34	1,2064142045
+
 
 	def st_calc(l,a,b,c,pH,ssc,seval,tX,dE,gD,noTR)
-		st = 	139.22516 -0.19282*l + 1.18667*a + 10.12652*b - 10.19815*c - 20.15348*pH 
-				-1.38471*ssc - 7.19258*Math.log10(seval.abs())*sign(seval) -4.48949*Math.log10(tX.abs())*sign(tX)
-				+ 1.16645*Math.log10(dE.abs())*sign(dE) + 4.44313*gD + 2.46953*noTR
+		logger.debug("l #{l}")
+		logger.debug("a #{a}")
+		logger.debug("b #{b}")
+		logger.debug("c #{c}")
+		logger.debug("pH #{pH}")
+		logger.debug("ssc #{ssc}")
+		logger.debug("seval #{seval}")
+		logger.debug("tX #{tX}")
+		logger.debug("dE #{dE}")
+		logger.debug("gD #{gD}")
+		logger.debug("noTR #{noTR}")
+
+		logger.debug("log(dE) #{Math.log10(dE.abs())*sign(dE)}")
+		logger.debug("log(seval) #{Math.log10(seval.abs())*sign(seval)}")
+		logger.debug("log(tX) #{Math.log10(tX.abs())*sign(tX)}")		
+
+		logger.debug("0.19282*l #{0.19282*l}")
+		
+		logger.debug("-20.15348*pH #{-20.15348*pH}")
+		logger.debug("-1.38471*ssc #{-1.38471*ssc}")
+		logger.debug("4.44313*gD #{4.44313*gD}")
+		logger.debug("2.46953*noTR #{2.46953*noTR}")
+
+
+		rez = 	139.22516 +
+				4.44313*gD + 
+				2.46953*noTR +
+				-0.19282*l +
+				1.18667*a +
+				10.12652*b +
+				-10.19815*c +
+				-20.15348*pH +
+				-1.38471*ssc +
+				-7.19258*Math.log10(seval.abs())*sign(seval) +
+				-4.48949*Math.log10(tX.abs())*sign(tX) +
+				1.16645*Math.log10(dE.abs())*sign(dE) 
+
+		logger.debug("rez #{rez}")
+
+		rez
 
 	end
 
