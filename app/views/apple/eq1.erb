@@ -1,4 +1,10 @@
 <head>
+	<meta charset="utf-8">
+    <meta name="Description" content="C.A.P.P.A.B.L.E. <sup>&#169;</sup>">
+    <meta name="" content="">
+    <meta name="">
+	<title>C.A.P.P.A.B.L.E. &#169;</title>
+
 	<style type="text/css" media="screen">
 		html, body, div, header, footer, aside, nav, article, section	{ margin: 0; padding: 0; }
 		header, footer, aside, nav, article, section	{ display: block; }
@@ -39,8 +45,8 @@
 <div id="container">
 		<header>
 
-			<h1>CAPPABLE</h1>
-			<p class="description">Browning of non-treated apples over storage time
+			<h1>C.A.P.P.A.B.L.E. <sup>&#169;</sup></h1>
+			<p class="description">Anti-browning Apple Calculator 
 			   <%= link_to image_tag("home2.png", size: "63x63", :border=>"0", :align=>"right"), '/', :alt=>"Home", :title=>"Home"%>
 			</p>
 
@@ -87,15 +93,15 @@
 
 <table>
 <tr>
-<td><%= label_tag(:L,"L*") %></td>
+<td><%= label_tag(:L,"L<sup>*</sup>".html_safe) %></td>
 <td><%= text_field_tag(:param_L) %></td>
 </tr>
 <tr>
-<td><%= label_tag(:a,"a*") %></td>
+<td><%= label_tag(:a,"a<sup>*</sup>".html_safe) %></td>
 <td><%= text_field_tag(:param_a) %></td>
 </tr>
 <tr>
-<td><%= label_tag(:b,"b*") %></td>
+<td><%= label_tag(:b,"b<sup>*</sup>".html_safe) %></td>
 <td><%= text_field_tag(:param_b) %></td>
 </tr>
 <tr>
@@ -128,7 +134,8 @@
 		<li><a href="/apple/eq2">pH</a></li>			
 		<h4><b>TREATED APPLES</b></h4>
 		<li><a href="/apple/eq4">Browning (CIELab) over storage time</a></li>
-		<li><a href="/apple/eq5">Sensory Evaluation</a></li>			
+		<li><a href="/apple/eq5">Sensory Evaluation</a></li>
+		<li><a href="/apple/st">Fresh-cut apple shelf-life</a></li>
 	</ul>
 </nav>
 

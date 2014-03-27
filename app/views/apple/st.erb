@@ -1,4 +1,10 @@
 <head>
+	<meta charset="utf-8">
+    <meta name="Description" content="C.A.P.P.A.B.L.E. <sup>&#169;</sup>">
+    <meta name="" content="">
+    <meta name="">
+	<title>C.A.P.P.A.B.L.E. &#169;</title>
+
 	<style type="text/css" media="screen">
 		html, body, div, header, footer, aside, nav, article, section	{ margin: 0; padding: 0; }
 		header, footer, aside, nav, article, section	{ display: block; }
@@ -39,8 +45,8 @@
 <div id="container">
 		<header>
 
-			<h1>CAPPABLE</h1>
-			<p class="description">Browning of apples over storage time
+			<h1>C.A.P.P.A.B.L.E. <sup>&#169;</sup></h1>
+			<p class="description">Predicting lenght of shelf-life for fresh-cut apples
 			   <%= link_to image_tag("home2.png", size: "63x63", :border=>"0", :align=>"right"), '/', :alt=>"Home", :title=>"Home"%>
 			</p>
 
@@ -50,7 +56,7 @@
 
 <section id="content">
 
-<h2>Calculate ??? </h2>
+<h2>Calculate the lenght of shelf-life </h2>
 <br>
 
 <strong>Select apple cultivar:</strong>
@@ -96,19 +102,19 @@
 
 <table>
 <tr>
-<td><%= label_tag(:L,"L* (0-100)") %></td>
+<td><%= label_tag(:L,"L<sup>*</sup> (0-100)".html_safe) %></td>
 <td><%= text_field_tag(:param_L) %></td>
 </tr>
 <tr>
-<td><%= label_tag(:a,"a* (∞ ≤a*≤ +∞)") %></td>
+<td><%= label_tag(:a,"a<sup>*</sup> (from -a<sup>*</sup> to +a<sup>*</sup>)".html_safe) %></td>
 <td><%= text_field_tag(:param_a) %></td>
 </tr>
 <tr>
-<td><%= label_tag(:b,"b* (-∞ ≤b*≤ +∞)") %></td>
+<td><%= label_tag(:b,"b<sup>*</sup> (from -b<sup>*</sup> to +b<sup>*</sup>)".html_safe) %></td>
 <td><%= text_field_tag(:param_b) %></td>
 </tr>
 <tr>
-<td><%= label_tag(:c,"C* (C*≤0)") %></td>
+<td><%= label_tag(:c,"C<sup>*</sup> (C<sup>*</sup>&ge; 0)".html_safe) %></td>
 <td><%= text_field_tag(:param_c) %></td>
 </tr>
 <tr>
@@ -116,7 +122,7 @@
 <td><%= text_field_tag(:param_ph) %></td>
 </tr>
 <tr>
-<td><%= label_tag(:ssc,"ssc (SSC≥0)") %></td>
+<td><%= label_tag(:ssc,"SSC (SSC ≥ 0)") %></td>
 <td><%= text_field_tag(:param_ssc) %></td>
 </tr>
 <tr>
@@ -128,7 +134,7 @@
 <td><%= text_field_tag(:param_tx) %> </td>
 </tr>
 <tr>
-<td><%= label_tag(:delta_e,"ΔE*ab (ΔE*ab≥0)") %></td>
+<td><%= label_tag(:delta_e,"&#916E<sup>*</sup><sub>ab</sub> (&#916E<sup>*</sup><sub>ab</sub>&ge; 0)".html_safe) %></td>
 <td><%= text_field_tag(:param_delta_e) %> </td>
 </tr>
 
@@ -153,10 +159,10 @@ function legalCheck() {
 
 
 </script>
-
+<br>
 <body onload="legalCheck()">
 
-<strong>Set limit (M) for for fresh-cut apple<strong>
+<strong>Set limit (M) for for fresh-cut apple</strong>
 
 <br>
 <%= radio_button_tag(:param_legal, value = "0", checked = true, options = {:id=>'legal', :onclick=>'javascript:legalCheck();'})  %>
@@ -178,7 +184,7 @@ function legalCheck() {
 
 
 <% unless @rezultat.nil? %>
-	Color change is: 
+	Length of shelf-life is:
 	<strong>
 		<div style="color:red">
 			STr = <%= number_with_precision @rezultat,:precision=>2  %> days
@@ -204,20 +210,15 @@ function legalCheck() {
 		<li><a href="/apple/eq2">pH</a></li>			
 		<h4><b>TREATED APPLES</b></h4>
 		<li><a href="/apple/eq4">Browning (CIELab) over storage time</a></li>
-		<li><a href="/apple/eq5">Sensory Evaluation</a></li>			
+		<li><a href="/apple/eq5">Sensory Evaluation</a></li>	
+		<li><a href="/apple/st.html">Shelf-life for fresh-cut apples</a></li>		
 	</ul>
 </nav>
 
 <section id="extra">
-	<h3>Subjective assessment of color difference by unaided average human eye:</h3>
-	<p> &#916E<sup>*</sup><sub>ab</sub> < 0.5 color difference hardly noticeable <br>
-		&#916E<sup>*</sup><sub>ab</sub> = 0.5 – 1.5 slightly noticeable color difference<br>
-		&#916E<sup>*</sup><sub>ab</sub> = 1.5 – 3.0 noticeable color difference<br>
-		&#916E<sup>*</sup><sub>ab</sub> = 3.0 – 6.0 considerable color difference<br>
-		&#916E<sup>*</sup><sub>ab</sub> = 6.0 – 12.0 large color difference<br>
-		&#916E<sup>*</sup><sub>ab</sub> > 12.0 extremely large color difference<br>
-	<br>
-	<b>Reference:</b>
-	Yang, Y.M., J. Yu, N., (2012). Color Image Quality Assessment Based on CIEDE2000. Advances in Multimedia 2012, 1-7. </p>		
+<div align="center">
+<%= image_tag("apple.jpg",size:"300x200",:border=>"0", :align=>"middle") %>
+</div>
 </section>
+
 </div>

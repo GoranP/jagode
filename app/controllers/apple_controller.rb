@@ -10,11 +10,12 @@ class AppleController < ApplicationController
 			name = params[:name]
 			email = params[:email]
 			body = params[:message]	
-
+			@color="red"
 			@notice = email_verify(email,body)
 			return unless @notice.empty?
 
 			ContactMailer.contact_email(name, email, body, "CAPPABLE").deliver
+			@color="blue"
 			@notice = "Your email has been sent successfully! Thanks."
 		end		
 	end
