@@ -159,10 +159,10 @@ function legalCheck() {
 <strong>Set limit (M) for for fresh-cut apple<strong>
 
 <br>
-<%= radio_button_tag(:legal, value = "0", checked = true, options = {:id=>'legal', :onclick=>'javascript:legalCheck();'})  %>
+<%= radio_button_tag(:param_legal, value = "0", checked = true, options = {:id=>'legal', :onclick=>'javascript:legalCheck();'})  %>
 <%= label_tag(:limit,'Legal limit') %>
 
-<%= radio_button_tag(:legal, value = "1", checked = false, options = {:onclick=>'javascript:legalCheck();'})  %>
+<%= radio_button_tag(:param_legal, value = "1", checked = false, options = {:onclick=>'javascript:legalCheck();'})  %>
 <%= label_tag(:treat,'Spoilage limit') %>
 <div id='params_ebac'>	
 	<%= label_tag(:limit,'Enter maximum allowed [cfu/g] Enterobacteriaceae:') %>
@@ -184,6 +184,10 @@ function legalCheck() {
 			STr = <%= number_with_precision @rezultat,:precision=>2  %> days
 			<br>
 			ΔST = <%= number_with_precision @rezultat_delta,:precision=>2  %> days
+			<br>
+			st_legal = <%= number_with_precision @st_lgl,:precision=>2  %>
+			<br>
+			st_spoiled = <%= number_with_precision @st_sp,:precision=>2  %>
 		</div>
 	</strong> 
 <% end %>

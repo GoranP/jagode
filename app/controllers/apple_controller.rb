@@ -67,8 +67,6 @@ class AppleController < ApplicationController
 	end
 
 	def st
-		#{ "sorta"=>"1", "treatement"=>"1", "param_L"=>"", "param_a"=>"", "param_b"=>"", "param_c"=>"", "param_ph"=>"", "param_ssc"=>"", "param_seval"=>"", 
-		#  "param_tx"=>"", "param_delta_e"=>"", "legal"=>"0", "param_ebac"=>"", "param_amb"=>""
 		if request.post?
 			logger.debug(params)
 
@@ -87,10 +85,13 @@ class AppleController < ApplicationController
 			ebac		= params[:param_ebac].to_f == 0.0 ? (10.0**-14).to_f : params[:param_ebac].to_f
 			amb			= params[:param_amb].to_f == 0.0 ? (10.0**-14).to_f : params[:param_amb].to_f
 			
-			logger.debug("treatement #{treatement}")
+			logger.debug("legal #{legal}")
 			@rezultat = st_calc(l,a,b,c,pH,ssc,seval,tx,delta_e,sorta,treatement)
 			
-			st = legal == 1 ? st_legal(ebac) : st_spoiled(amb)
+			@st_lgl = st_legal(ebac)
+			@st_sp = st_spoiled(amb)
+
+			st = legal == 0 ? st_legal(ebac) : st_spoiled(amb)
 			@rezultat_delta = st - @rezultat
 		end		
 	end
@@ -141,16 +142,16 @@ private
 
 		logger.debug("rez #{rez}")
 
-		rez
+		sign(rez) < 0 ? 0 : rez
 
 	end
 
 	def st_spoiled (amb)
-		st_spoiled = -3.90 +2.07*Math.log10(amb.abs())*sign(amb)
+		-3.90 + 2.07*Math.log10(amb.abs())*sign(amb)		
 	end
 
 	def st_legal(ebac)
-		st_legal = -0.66 + 3.52*Math.log10(ebac.abs())*sign(ebac)
+		-0.66 + 3.52*Math.log10(ebac.abs())*sign(ebac)
 	end
 
 
