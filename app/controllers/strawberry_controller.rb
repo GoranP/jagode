@@ -13,6 +13,10 @@ class StrawberryController < ApplicationController
 			name = params[:name]
 			email = params[:email]
 			body = params[:message]
+	
+			@notice = email_verify(email,body)
+			return unless @notice.empty?
+
 			ContactMailer.contact_email(name, email, body, "TAC").deliver
 			@notice = "Your email has been sent successfully! Thanks."
 		end
