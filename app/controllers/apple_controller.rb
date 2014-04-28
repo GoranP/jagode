@@ -99,7 +99,54 @@ class AppleController < ApplicationController
 		end		
 	end
 
+	def r3eq1
+
+		if request.post?
+			logger.debug(params)
+			#{}"sorta"=>"1", "atmosphere"=>"1", "treatment"=>"1", "param_L"=>"", "param_a"=>"", "param_b"=>"", "param_SL"=>""
+			sorta 		= params[:sorta].to_i
+			treatement 	= params[:treatement].to_i
+			l 		 	= params[:param_L].to_f
+			a 			= params[:param_a].to_f
+			b 			= params[:param_b].to_f
+			sl= params[:param_SL].to_f== 0.0 ? (10.0**-14).to_f : params[:param_SL].to_f
+
+		end
+	end
+
+	def r3eq2
+		if request.post?
+			logger.debug(params)
+		end
+
+	end
+
+
 private	
+	def r3eq2
+	# A= length * width
+	# Vtotal=(A*1000)/468
+	# Vf=Vtotal-(M/Mρ)
+	# R_O2=(P * A * ((yO2_out - yO2_in)/100)) - (Vf * ( ((yO2_@tn - yO2_@t0)/(tn-t0)/100)))) / M
+	# R_CO2=(Vf * ( ((yCO2_@tn - yCO2_@t0)/(tn-t0)/100)))) - (PCO2 * A * (yCO2_in - yCO2_out) / 100) / 0.2.
+	# RQ=ABS(R_CO2 / R_O2)
+	# DE=61.765586 - 0.916736*L - 0.013021*10^a + 0.879620*b - 0.343499*SL+ 1.891972 * sin (R_CO2) -
+	# 2.617151*GD + 42.428782*NOTR + 1.392731*ASCCIA - 0.932000*CASC - 0.087195 * USNDCASC
+
+	end
+
+	def r3eq1_calc()
+
+# 		Math.log(de_ab) =  -11.27 + 0.13*L + 0.12*a + 0.08*b 		
+# log  ΔΕ * ab    11.27  0.13  L *  0.12  a *  0.08  b *  0.21  log (SL [days])
+#  0.63  (no MA)  0.34  (GD)  0.36  (no treatment)
+#  0.25  (asorbic  citric acid)  0.25  (Ca-ascorbate)
+#  0.16  (usnd 3 min  Ca-ascorbate)		
+
+# log ΔΕ = -11.27 + 0.13*L + 0.12*a + 0.08*b+0.21*log (SL [days]) + 0.63*(no MA) - 0.34*(GD) + 0.36*(no
+# treatment) + 0.25*(asorbic citric acid) - 0.25*(Ca-ascorbate)-0.16*(usnd 3 min Ca-ascorbate)
+
+	end
 
 	def st_calc(l,a,b,c,pH,ssc,seval,tX,dE,gD,noTR)
 
