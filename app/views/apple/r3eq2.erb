@@ -95,7 +95,7 @@
 </tr>
 <tr>
 <td><%= label_tag(:M,"Mass of packaged apple:".html_safe) %> <%= label_tag(:M_T,"[kg]")%></td>
-<td><%= text_field_tag(:param_b) %></td>
+<td><%= text_field_tag(:param_MT) %></td>
 </tr>
 <tr>
 <td><%= label_tag(:MP,"Apple density:") %></td>
@@ -207,7 +207,7 @@
 
 <br>Color change is: 
 <strong>
-	<div style="color:red">ΔE*ab = <%= number_with_precision @rezultat,:precision=>2  %> 
+	<div style="color:red">parametars: <%= @debug  %> 
 	
 	</div>
 </strong>

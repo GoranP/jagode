@@ -120,6 +120,37 @@ class AppleController < ApplicationController
 	def r3eq2
 		if request.post?
 			logger.debug(params)
+
+			length = params[:param_LP].to_f
+			width  = params[:param_WP].to_f
+			massP  = params[:param_MT].to_f			
+			yO2tn  = params[:param_yO2_tn].to_f
+			yO2t0  = params[:param_yO2_t0].to_f
+			yCO2tn = params[:param_yCO2_tn].to_f
+			yCO2t0 = params[:param_yCO2_t0].to_f
+			tn     = params[:param_tn].to_f
+			t0     = params[:param_t0].to_f
+			yO2in  = params[:param_yO2_in].to_f
+			yCO2in = params[:param_yCO2_in].to_f
+			yO2out = params[:param_yO2_out].to_f
+			yCO2out = params[:param_yCO2_out].to_f
+			pcO2   = params[:param_PC_O2].to_f
+			pcCO2  = params[:param_PC_CO2].to_f
+
+			sorta 		= params[:sorta].to_i
+			treatement 	= params[:treatement].to_i
+
+			l 		 	= params[:param_L].to_f
+			a 			= params[:param_a].to_f
+			b 			= params[:param_b].to_f
+			sl          = params[:param_SL].to_f == 0.0 ? (10.0**-14).to_f : params[:param_SL].to_f
+
+			d1 = "length=#{length}; width=#{width}; massP=#{massP}; yO2tn=#{yO2tn}; yO2t0=#{yO2t0}; \n"
+			d2 = "yCO2tn=#{yCO2tn}; yCO2t0=#{yCO2t0}; tn=#{tn}; t0=#{t0}; yO2in=#{yO2in};\n"
+			d3 = "yCO2in=#{yCO2in}; yO2out=#{yO2out}; yCO2out=#{yCO2out}; pcO2=#{pcO2}; pcCO2=#{pcCO2};\n"
+			d4 = "sorta=#{sorta}; treatement=#{treatement}; l=#{l}; a=#{a}; b=#{b} SL=#{sl}"
+			@debug = d1+d2+d3+d4
+			@rezultat ="124"
 		end
 
 	end
@@ -127,7 +158,7 @@ class AppleController < ApplicationController
 
 private	
 	def r3eq2_calc
-	
+
 	# A= length * width
 	# Vtotal=(A*1000)/468
 	# Vf=Vtotal-(M/Mρ)
