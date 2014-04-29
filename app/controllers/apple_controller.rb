@@ -106,10 +106,13 @@ class AppleController < ApplicationController
 			#{}"sorta"=>"1", "atmosphere"=>"1", "treatment"=>"1", "param_L"=>"", "param_a"=>"", "param_b"=>"", "param_SL"=>""
 			sorta 		= params[:sorta].to_i
 			treatement 	= params[:treatement].to_i
+			atmosphere	= params[:atmosphere].to_i
 			l 		 	= params[:param_L].to_f
 			a 			= params[:param_a].to_f
 			b 			= params[:param_b].to_f
-			sl= params[:param_SL].to_f== 0.0 ? (10.0**-14).to_f : params[:param_SL].to_f
+			sl= params[:param_SL].to_f == 0.0 ? (10.0**-14).to_f : params[:param_SL].to_f
+
+			@rezultat = r3eq1_calc(l,a,b,sl,atmosphere,sorta,treatement)
 
 		end
 	end
@@ -123,7 +126,8 @@ class AppleController < ApplicationController
 
 
 private	
-	def r3eq2
+	def r3eq2_calc
+	
 	# A= length * width
 	# Vtotal=(A*1000)/468
 	# Vf=Vtotal-(M/Mρ)
@@ -135,16 +139,35 @@ private
 
 	end
 
-	def r3eq1_calc()
+	def r3eq1_calc(pL,a,b,sL,atmosphere,sorta,treatment)
+		
+		#no modification
+		noMA = atmosphere == 1 ? 1 : 0
+		#golden delicious
+		gD = sorta == 1 ? 1 : 0
+		#treatment
+		notreatment = treatment == 1 ? 1 : 0
+		aca 		= treatment == 2 ? 1 : 0
+		caAsc 		= treatment == 3 ? 1 : 0
+		usnd 		= treatment == 4 ? 1 : 0
+		logger.debug(sL)
+		#formula
+		logde = -11.2744286 + 
+				0.1266782*pL + 
+				0.1244982*a + 
+				0.0848380*b + 
+				0.2065836*Math.log10(sL.abs())*sign(sL) + 
+				0.6276360*(noMA) + 
+				-0.3403982*(gD) + 
+				0.3625182*(notreatment) + 
+				0.2453202*(aca) + 
+				-0.2475309*(caAsc) + 
+				-0.1608707*(usnd)
 
-# 		Math.log(de_ab) =  -11.27 + 0.13*L + 0.12*a + 0.08*b 		
-# log  ΔΕ * ab    11.27  0.13  L *  0.12  a *  0.08  b *  0.21  log (SL [days])
-#  0.63  (no MA)  0.34  (GD)  0.36  (no treatment)
-#  0.25  (asorbic  citric acid)  0.25  (Ca-ascorbate)
-#  0.16  (usnd 3 min  Ca-ascorbate)		
-
-# log ΔΕ = -11.27 + 0.13*L + 0.12*a + 0.08*b+0.21*log (SL [days]) + 0.63*(no MA) - 0.34*(GD) + 0.36*(no
-# treatment) + 0.25*(asorbic citric acid) - 0.25*(Ca-ascorbate)-0.16*(usnd 3 min Ca-ascorbate)
+		@debug = "l = #{pL}; a = #{a}; b = #{b}; SL = #{sL}; log(sL) = #{Math.log10(sL.abs())*sign(sL)}; GoldenDelic=#{gD}; noMA = #{noMA}; notreatment = #{notreatment}; Asorc+citrid = #{aca}, Ca-ascorb = #{caAsc}; usnd = #{usnd}; logde = #{logde}; de=#{10**logde}"
+		logger.debug("logde = #{logde}")
+		#result
+		10**logde
 
 	end
 

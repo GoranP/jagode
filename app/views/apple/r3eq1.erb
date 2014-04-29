@@ -121,9 +121,11 @@
 <% unless @rezultat.nil? %>
 <br>Color change is: 
 <strong>
-	<div style="color:red">ΔE*ab = <%= number_with_precision @rezultat,:precision=>2  %> 
-	
+	<div style="color:red">ΔE*ab = <%= number_with_precision @rezultat,:precision=>2  %> 	
 	</div>
+	<div style="color:red">parameters: <%= @debug  %> 	
+	</div>
+
 </strong>
 <% end %>
 <br>
