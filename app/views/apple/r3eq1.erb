@@ -62,33 +62,33 @@
 
 <%= form_tag('/apple/r3eq1') %>
 
-<%= radio_button_tag(:sorta, value = "1", checked = true, options = {})  %>
+<%= radio_button_tag(:sorta, value = "1", checked = @sorta == 1 , options = {})  %>
 <%= label_tag(:cultivars,'Golden Delicious') %>
 <br>
-<%= radio_button_tag(:sorta, value = "2", checked = false, options = {})  %>
+<%= radio_button_tag(:sorta, value = "2", checked = @sorta == 2, options = {})  %>
 <%= label_tag(:cultivars,'Cripps Pink') %>
 <br>
 
 <br>
 <strong>Select type of atmosphere:</strong>
 <br>
-<%= radio_button_tag(:atmosphere, value = "1", checked = true, options = {})  %>
+<%= radio_button_tag(:atmosphere, value = "1", checked = @atmosphere == 1, options = {})  %>
 <%= label_tag(:atmosphere_type,'No modified atmosphere') %>
 <br>
-<%= radio_button_tag(:atmosphere, value = "2", checked = false, options = {})  %>
+<%= radio_button_tag(:atmosphere, value = "2", checked = @atmosphere == 2, options = {})  %>
 <%= label_tag(:atmosphere_type,'With modified atmosphere') %>
 <br>
 
 <br>
-<strong>Select anti-browning treatment:</strong>
+<strong>Select anti-browning treatement:</strong>
 <br>
-<%= select_tag(:treatment,options_for_select(
-[	["No treatment",1],
+<%= select_tag(:treatement,options_for_select(
+[	["No treatement",1],
 	["Ascorbic with citric acid",2],
 	["Ca-ascorbate",3],	
 	["Ultrasound (3 min) with Ca-ascorbate",4],	
 	["Ultrasound (3 min) ascorbic and citric acid",5]
-]),{}) %>
+],@treatement),{}) %>
 
 
 <br>
@@ -99,19 +99,19 @@
 <table>
 <tr>
 <td><%= label_tag(:L,"L<sup>*</sup>".html_safe) %></td>
-<td><%= text_field_tag(:param_L) %></td>
+<td><%= text_field_tag(:param_L,@l) %></td>
 </tr>
 <tr>
 <td><%= label_tag(:a,"a<sup>*</sup>".html_safe) %></td>
-<td><%= text_field_tag(:param_a) %></td>
+<td><%= text_field_tag(:param_a,@a) %></td>
 </tr>
 <tr>
 <td><%= label_tag(:b,"b<sup>*</sup>".html_safe) %></td>
-<td><%= text_field_tag(:param_b) %></td>
+<td><%= text_field_tag(:param_b,@b) %></td>
 </tr>
 <tr>
 <td><%= label_tag(:SL,"SL") %></td>
-<td><%= text_field_tag(:param_SL) %> <%= label_tag(:SL_H,"[days]") %></td>
+<td><%= text_field_tag(:param_SL,@sl) %> <%= label_tag(:SL_H,"[days]") %></td>
 </tr>
 </table>
 
@@ -123,10 +123,13 @@
 <strong>
 	<div style="color:red">ΔE*ab = <%= number_with_precision @rezultat,:precision=>2  %> 	
 	</div>
-	<div style="color:red">parameters: <%= @debug  %> 	
-	</div>
-
 </strong>
+
+<br>
+---DEBUG---
+<br>
+<%= @debug %>
+
 <% end %>
 <br>
 <%= submit_tag('Calculate') %>

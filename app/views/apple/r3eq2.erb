@@ -62,10 +62,10 @@
 
 <%= form_tag('/apple/r3eq2') %>
 
-<%= radio_button_tag(:sorta, value = "1", checked = true, options = {})  %>
+<%= radio_button_tag(:sorta, value = "1", checked = @sorta == 1, options = {})  %>
 <%= label_tag(:cultivars,'Golden Delicious') %>
 <br>
-<%= radio_button_tag(:sorta, value = "2", checked = false, options = {})  %>
+<%= radio_button_tag(:sorta, value = "2", checked = @sorta == 2, options = {})  %>
 <%= label_tag(:cultivars,'Cripps Pink') %>
 <br>
 
@@ -78,7 +78,7 @@
 	["Ca-ascorbate",3],	
 	["Ultrasound (3 min) with Ca-ascorbate",4],	
 	["Ultrasound (3 min) ascorbic and citric acid",5]
-]),{}) %>
+],@treatement),{}) %>
 
 
 <br>
@@ -87,78 +87,78 @@
 <table>
 <tr>
 <td><%= label_tag(:LP,"Length of package:".html_safe) %></td>
-<td><%= text_field_tag(:param_LP) %> <%= label_tag(:LP_T,"[cm]")%></td>
+<td><%= text_field_tag(:param_LP,@length) %> <%= label_tag(:LP_T,"[cm]")%></td>
 </tr>
 <tr>
 <td><%= label_tag(:WP,"Width of package:".html_safe) %></td>
-<td><%= text_field_tag(:param_WP) %> <%= label_tag(:WP_T,"[cm]")%></td>
+<td><%= text_field_tag(:param_WP,@width) %> <%= label_tag(:WP_T,"[cm]")%></td>
 </tr>
 <tr>
 <td><%= label_tag(:M,"Mass of packaged apple:".html_safe) %> <%= label_tag(:M_T,"[kg]")%></td>
-<td><%= text_field_tag(:param_MT) %></td>
+<td><%= text_field_tag(:param_MT,@massT) %></td>
 </tr>
 <tr>
 <td><%= label_tag(:MP,"Apple density:") %></td>
-<td><%= text_field_tag(:param_SL) %> <%= label_tag(:M_T,"[g/cm3]")%></td>
+<td><%= text_field_tag(:param_MP,@massP) %> <%= label_tag(:M_T,"[g/cm3]")%></td>
 </tr>
 <tr>
 <td><%= label_tag(:yO2_tn,"volumetric concentration of O 2 @ time n:") %></td>
-<td><%= text_field_tag(:param_yO2_tn) %> <%= label_tag(:percent,"[%]")%></td>
+<td><%= text_field_tag(:param_yO2_tn,@yO2tn) %> <%= label_tag(:percent,"[%]")%></td>
 </tr>
 
 <tr>
 <td><%= label_tag(:yO2_t0,"volumetric concentration of O 2 @ time 0:") %></td>
-<td><%= text_field_tag(:param_yO2_t0) %> <%= label_tag(:percent,"[%]")%></td>
+<td><%= text_field_tag(:param_yO2_t0,@yO2t0) %> <%= label_tag(:percent,"[%]")%></td>
 </tr>
 
 <tr>
 <td><%= label_tag(:yCO2_tn,"volumetric concentration of CO 2 @ time n:") %></td>
-<td><%= text_field_tag(:param_yCO2_tn) %> <%= label_tag(:percent,"[%]")%></td>
+<td><%= text_field_tag(:param_yCO2_tn,@yCO2tn) %> <%= label_tag(:percent,"[%]")%></td>
 </tr>
 
 <tr>
 <td><%= label_tag(:yCO2_t0,"volumetric concentration of CO 2 @ time 0:") %></td>
-<td><%= text_field_tag(:param_yCO2_t0) %> <%= label_tag(:percent,"[%]")%></td>
+<td><%= text_field_tag(:param_yCO2_t0,@yCO2tn) %> <%= label_tag(:percent,"[%]")%></td>
 </tr>
 
 <tr>
 <td><%= label_tag(:tn,"time n:") %></td>
-<td><%= text_field_tag(:param_tn) %> <%= label_tag(:percent,"[days]")%></td>
+<td><%= text_field_tag(:param_tn,@tn) %> <%= label_tag(:percent,"[days]")%></td>
 </tr>
 
 <tr>
 <td><%= label_tag(:tn,"time 0:") %></td>
-<td><%= text_field_tag(:param_t0) %> <%= label_tag(:percent,"[days]")%></td>
+<td><%= text_field_tag(:param_t0,@t0) %> <%= label_tag(:percent,"[days]")%></td>
 </tr>
 
 <tr>
 <td><%= label_tag(:yO2_in,"volumetric concentration O<sub>2</sub> in package:".html_safe) %></td>
-<td><%= text_field_tag(:param_yO2_in) %> <%= label_tag(:percent,"[%]")%></td>
+<td><%= text_field_tag(:param_yO2_in,@yO2in) %> <%= label_tag(:percent,"[%]")%></td>
 </tr>
 
 <tr>
 <td><%= label_tag(:yCO2_in,"volumetric concentration CO<sub>2</sub> in package:".html_safe) %></td>
-<td><%= text_field_tag(:param_yCO2_in) %> <%= label_tag(:percent,"[%]")%></td>
+<td><%= text_field_tag(:param_yCO2_in,@yCO2in) %> <%= label_tag(:percent,"[%]")%></td>
 </tr>
 
 <tr>
 <td><%= label_tag(:yO2_out,"external volumetric concentration O<sub>2</sub> in package:".html_safe) %></td>
-<td><%= text_field_tag(:param_yO2_out) %> <%= label_tag(:percent,"[%]")%></td>
+<td><%= text_field_tag(:param_yO2_out,@yO2out) %> <%= label_tag(:percent,"[%]")%></td>
 </tr>
 
 <tr>
 <td><%= label_tag(:yCO2_out,"external volumetric concentration CO<sub>2</sub> in package:".html_safe) %></td>
-<td><%= text_field_tag(:param_yCO2_out) %> <%= label_tag(:percent,"[%]")%></td>
+<td><%= text_field_tag(:param_yCO2_out,@yCO2out) %> <%= label_tag(:percent,"[%]")%></td>
 </tr>
 
 <tr>
 <td><%= label_tag(:PC_O2,"Permeance O<sub>2</sub>:".html_safe) %></td>
-<td><%= text_field_tag(:param_PC_O2) %> <%= label_tag(:percent,"[cm3/m×day×atm]")%></td>
+<td><%= text_field_tag(:param_PC_O2,@pcO2) %> <%= label_tag(:percent,"[cm3/m×day×atm]")%></td>
 </tr>
 
 <tr>
 <td><%= label_tag(:PC_CO2,"Permeance CO<sub>2</sub>:".html_safe) %></td>
-<td><%= text_field_tag(:param_PC_CO2) %> <%= label_tag(:percent,"[cm3/m×day×atm]")%></td>
+<td><%= text_field_tag(:param_PC_CO2,@pcCO2) %> <%= label_tag(:percent,"[cm3/m×day×atm]")%></td>
 </tr>
 
 </table>
@@ -171,46 +171,59 @@
 <table>
 <tr>
 <td><%= label_tag(:L,"L<sup>*</sup>".html_safe) %></td>
-<td><%= text_field_tag(:param_L) %></td>
+<td><%= text_field_tag(:param_L,@l) %></td>
 </tr>
 <tr>
 <td><%= label_tag(:a,"a<sup>*</sup>".html_safe) %></td>
-<td><%= text_field_tag(:param_a) %></td>
+<td><%= text_field_tag(:param_a,@a) %></td>
 </tr>
 <tr>
 <td><%= label_tag(:b,"b<sup>*</sup>".html_safe) %></td>
-<td><%= text_field_tag(:param_b) %></td>
+<td><%= text_field_tag(:param_b,@b) %></td>
 </tr>
 <tr>
 <td><%= label_tag(:SL,"SL") %></td>
-<td><%= text_field_tag(:param_SL) %> <%= label_tag(:SL_H,"[days]") %></td>
+<td><%= text_field_tag(:param_SL,@sl) %> <%= label_tag(:SL_H,"[days]") %></td>
 </tr>
 </table>
 
 
 
 <br>
-<% unless @rezultat.nil? %>
+<% unless @dE.nil? %>
 
 <br>
 <strong>Respiration parameters for permeable system:</strong>
 <br>
-<table>
+<div style="color:red">
+<strong>Package surface area:</strong> <%= number_with_precision @vA,:precision=>2  %> [cm<sup>2</sup>]
+</div>
+<div style="color:red">
+<strong>Total package volume:</strong> <%= number_with_precision @vtotal,:precision=>2  %> [cm<sup>3</sup>]
+</div>
+<div style="color:red">
+<strong>Free volume in package:</strong> <%= number_with_precision @vf,:precision=>2  %> [cm<sup>3</sup>]
+</div>
+<div style="color:red">
+<strong>O<sub>2</sub> consumption is:</strong> <%= number_with_precision @r_O2,:precision=>2  %> [cm<sup>3</sup>/kg×day×atm]
+</div>
+<div style="color:red">
+<strong>CO<sub>2</sub> consumption is:</strong> <%= number_with_precision @r_CO2,:precision=>2  %> [cm<sup>3</sup>/kg×day×atm]
+</div>
 
-<tr>
-<td><%= label_tag(:PA,"Package surface area:".html_safe) %></td>
-</tr>
-<!-- UPIŠI OSTALO -->
+<div style="color:red">
+<strong>Respiration quotient is:</strong> <%= number_with_precision @rQ,:precision=>2  %> [cm<sup>3</sup>]
+</div>
 
-</table>
-
-
-<br>Color change is: 
-<strong>
-	<div style="color:red">parametars: <%= @debug  %> 
-	
-	</div>
-</strong>
+<br>
+<strong>Color change is:</strong>
+<div style="color:red">
+<strong>ΔE*ab = </strong> <%= number_with_precision @dE,:precision=>2  %> [cm<sup>3</sup>]
+</div>
+<br>
+---DEBUG---
+<br>
+<%= @debug %>
 <% end %>
 <br>
 <%= submit_tag('Calculate') %>

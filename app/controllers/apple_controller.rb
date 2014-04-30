@@ -101,16 +101,24 @@ class AppleController < ApplicationController
 
 	def r3eq1
 
+		@sorta 		=  1 if params[:sorta].nil?
+		@treatement =  1 if params[:treatement].nil?
+		@atmosphere =  1 if params[:atmosphere].nil?
+		@l  =  params[:param_L].to_f
+		@a  =  params[:param_a].to_f
+		@b  =  params[:param_b].to_f
+		@sl =  params[:param_SL].to_f == 0.0 ? (10.0**-14).to_f : params[:param_SL].to_f
+
 		if request.post?
 			logger.debug(params)
 			#{}"sorta"=>"1", "atmosphere"=>"1", "treatment"=>"1", "param_L"=>"", "param_a"=>"", "param_b"=>"", "param_SL"=>""
-			sorta 		= params[:sorta].to_i
-			treatement 	= params[:treatement].to_i
-			atmosphere	= params[:atmosphere].to_i
-			l 		 	= params[:param_L].to_f
-			a 			= params[:param_a].to_f
-			b 			= params[:param_b].to_f
-			sl= params[:param_SL].to_f == 0.0 ? (10.0**-14).to_f : params[:param_SL].to_f
+			@sorta      = sorta 		= params[:sorta].to_i
+			@treatement = treatement 	= params[:treatement].to_i
+			@atmosphere = atmosphere	= params[:atmosphere].to_i
+			@l  = l 		 	= params[:param_L].to_f
+			@a  = a 			= params[:param_a].to_f
+			@b  = b 			= params[:param_b].to_f
+			@sl = sl= params[:param_SL].to_f == 0.0 ? (10.0**-14).to_f : params[:param_SL].to_f
 
 			@rezultat = r3eq1_calc(l,a,b,sl,atmosphere,sorta,treatement)
 
@@ -118,55 +126,116 @@ class AppleController < ApplicationController
 	end
 
 	def r3eq2
+		@length = 0.2 if params[:param_LP].nil?
+		@width  = 0.2 if params[:param_WP].nil?
+		@massT  = 0.2 if params[:param_MT].nil?
+		@massP  = 0.464 if params[:param_MP].nil?
+
+
+		@yO2tn  =  params[:param_yO2_tn].to_f
+		@yO2t0  =  params[:param_yO2_t0].to_f
+		@yCO2tn =  params[:param_yCO2_tn].to_f
+		@yCO2t0 =  params[:param_yCO2_t0].to_f
+		@tn  	=  0.5 if params[:param_tn].nil?
+		@t0 	=  params[:param_t0].to_f
+		@yO2in 	=  params[:param_yO2_in].to_f
+		@yCO2in =  params[:param_yCO2_in].to_f
+		@yO2out =  20.95  if params[:param_yO2_out].nil?
+		@yCO2out=  0.03   if params[:param_yCO2_out].nil?
+		@pcO2   =  633.0  if params[:param_PC_O2].nil?
+		@pcCO2  =  331.0  if params[:param_PC_CO2].nil?
+
+		@sorta 		=  1 if params[:sorta].nil?
+		@treatement =  1 if params[:treatement].nil?
+
+		@l  =  params[:param_L].to_f
+		@a  =  params[:param_a].to_f
+		@b  =  params[:param_b].to_f
+		@sl =  params[:param_SL].to_f 
+
+
+
 		if request.post?
 			logger.debug(params)
 
-			length = params[:param_LP].to_f
-			width  = params[:param_WP].to_f
-			massP  = params[:param_MT].to_f			
-			yO2tn  = params[:param_yO2_tn].to_f
-			yO2t0  = params[:param_yO2_t0].to_f
-			yCO2tn = params[:param_yCO2_tn].to_f
-			yCO2t0 = params[:param_yCO2_t0].to_f
-			tn     = params[:param_tn].to_f
-			t0     = params[:param_t0].to_f
-			yO2in  = params[:param_yO2_in].to_f
-			yCO2in = params[:param_yCO2_in].to_f
-			yO2out = params[:param_yO2_out].to_f
-			yCO2out = params[:param_yCO2_out].to_f
-			pcO2   = params[:param_PC_O2].to_f
-			pcCO2  = params[:param_PC_CO2].to_f
+			@length = length = params[:param_LP].to_f
+			@width  = width  = params[:param_WP].to_f
+			@massT  = massT  = params[:param_MT].to_f			
+			@massP  = massP  = params[:param_MP].to_f
+			@yO2tn  = yO2tn  = params[:param_yO2_tn].to_f
+			@yO2t0  = yO2t0  = params[:param_yO2_t0].to_f
+			@yCO2tn = yCO2tn = params[:param_yCO2_tn].to_f
+			@yCO2t0 = yCO2t0 = params[:param_yCO2_t0].to_f
+			@tn  	= tn     = params[:param_tn].to_f
+			@t0 	= t0     = params[:param_t0].to_f
+			@yO2in 	= yO2in  = params[:param_yO2_in].to_f
+			@yCO2in = yCO2in = params[:param_yCO2_in].to_f
+			@yO2out = yO2out = params[:param_yO2_out].to_f
+			@yCO2out= yCO2out = params[:param_yCO2_out].to_f
+			@pcO2   = pcO2   = params[:param_PC_O2].to_f
+			@pcCO2  = pcCO2  = params[:param_PC_CO2].to_f
 
-			sorta 		= params[:sorta].to_i
-			treatement 	= params[:treatement].to_i
+			@sorta 		= sorta 		= params[:sorta].to_i
+			@treatement = treatement 	= params[:treatement].to_i
 
-			l 		 	= params[:param_L].to_f
-			a 			= params[:param_a].to_f
-			b 			= params[:param_b].to_f
-			sl          = params[:param_SL].to_f == 0.0 ? (10.0**-14).to_f : params[:param_SL].to_f
+			@l  = l = params[:param_L].to_f
+			@a  = a = params[:param_a].to_f
+			@b  = b = params[:param_b].to_f
+			@sl = sl= params[:param_SL].to_f 
 
 			d1 = "length=#{length}; width=#{width}; massP=#{massP}; yO2tn=#{yO2tn}; yO2t0=#{yO2t0}; \n"
 			d2 = "yCO2tn=#{yCO2tn}; yCO2t0=#{yCO2t0}; tn=#{tn}; t0=#{t0}; yO2in=#{yO2in};\n"
 			d3 = "yCO2in=#{yCO2in}; yO2out=#{yO2out}; yCO2out=#{yCO2out}; pcO2=#{pcO2}; pcCO2=#{pcCO2};\n"
 			d4 = "sorta=#{sorta}; treatement=#{treatement}; l=#{l}; a=#{a}; b=#{b} SL=#{sl}"
-			@debug = d1+d2+d3+d4
-			@rezultat ="124"
+			
+			@debug = d1+d2+d3+d4			
+
+			r3eq2_calc(length,width,massT,massP,pcO2,pcCO2,yO2out,yO2in,yO2tn,yO2t0,tn,t0,yCO2tn,yCO2t0,yCO2in,yCO2out,l,a,b,sl,sorta,treatement)
 		end
 
 	end
 
 
 private	
-	def r3eq2_calc
+	
+	def r3eq2_calc(length,width,massT,massP,pcO2,pcCO2,yO2out,yO2in,yO2tn,yO2t0,tn,t0,yCO2tn,yCO2t0,yCO2in,yCO2out,l,a,b,sl,sorta,treatement)
+		
+		#Golden Delicous
+		gD = sorta == 1 ? 1 : 0
+		#treatement
+		notreatment = treatement == 1 ? 1 : 0
+		asccia 		= treatement == 2 ? 1 : 0
+		casc 		= treatement == 3 ? 1 : 0
+		usndcasc	= treatement == 4 ? 1 : 0
 
-	# A= length * width
-	# Vtotal=(A*1000)/468
-	# Vf=Vtotal-(M/Mρ)
-	# R_O2=(P * A * ((yO2_out - yO2_in)/100)) - (Vf * ( ((yO2_@tn - yO2_@t0)/(tn-t0)/100)))) / M
-	# R_CO2=(Vf * ( ((yCO2_@tn - yCO2_@t0)/(tn-t0)/100)))) - (PCO2 * A * (yCO2_in - yCO2_out) / 100) / 0.2.
-	# RQ=ABS(R_CO2 / R_O2)
-	# DE=61.765586 - 0.916736*L - 0.013021*10^a + 0.879620*b - 0.343499*SL+ 1.891972 * sin (R_CO2) -
-	# 2.617151*GD + 42.428782*NOTR + 1.392731*ASCCIA - 0.932000*CASC - 0.087195 * USNDCASC
+		vA = length * width
+		logger.debug("A = #{vA}")
+		
+		vtotal=(vA*1000)/468
+		logger.debug("Vtotal = #{vtotal}")
+		
+		vf=vtotal-(massT/massP)
+		logger.debug("vf = #{vf}")
+
+		r_O2=(((pcO2 * vA * ((yO2out - yO2in)/100)) - (vf * ((yO2tn - yO2t0) / (tn-t0) /100)))) / massT
+		logger.debug("r_O2 = #{r_O2}")
+		
+		r_CO2=(((vf * ( ((yCO2tn-yCO2t0)/(tn-t0)/100))))-(pcO2*vA*(yCO2in - yCO2out) / 100)) / massT
+		logger.debug("r_CO2 = #{r_CO2}")
+
+		rQ=(r_CO2 / r_O2).abs()
+		logger.debug("rQ = #{rQ}")
+
+		dE= 54.504535 - 0.829271*l-0.009992*(10**a) + 0.859552*b - 0.224326*sl + 1.292377*Math.sin(r_CO2) + 
+		    -2.759410*gD + 42.138068*notreatment + 1.149526*asccia - 1.333054*casc - 0.517378*usndcasc
+		
+		@vA 	= vA
+		@vtotal = vtotal
+		@vf 	= vf
+		@r_O2 	= r_O2
+		@r_CO2 	= r_CO2
+		@rQ 	= rQ
+		@dE 	= dE<0? 0 : dE
 
 	end
 
