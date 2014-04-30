@@ -94,8 +94,8 @@
 <td><%= text_field_tag(:param_WP,@width) %> <%= label_tag(:WP_T,"[cm]")%></td>
 </tr>
 <tr>
-<td><%= label_tag(:M,"Mass of packaged apple:".html_safe) %> <%= label_tag(:M_T,"[kg]")%></td>
-<td><%= text_field_tag(:param_MT,@massT) %></td>
+<td><%= label_tag(:M,"Mass of packaged apple:".html_safe) %> </td>
+<td><%= text_field_tag(:param_MT,@massT) %> <%= label_tag(:M_T,"[kg]")%> </td>
 </tr>
 <tr>
 <td><%= label_tag(:MP,"Apple density:") %></td>
@@ -196,7 +196,7 @@
 <strong>Respiration parameters for permeable system:</strong>
 <br>
 <div style="color:red">
-<strong>Package surface area:</strong> <%= number_with_precision @vA,:precision=>2  %> [cm<sup>2</sup>]
+<strong>Package surface area:</strong> <%= number_with_precision @vA,:precision=>2  %> [m<sup>2</sup>]
 </div>
 <div style="color:red">
 <strong>Total package volume:</strong> <%= number_with_precision @vtotal,:precision=>2  %> [cm<sup>3</sup>]
@@ -221,9 +221,10 @@
 <strong>ΔE*ab = </strong> <%= number_with_precision @dE,:precision=>2  %> [cm<sup>3</sup>]
 </div>
 <br>
----DEBUG---
-<br>
-<%= @debug %>
+
+
+<%= @debug.html_safe %>
+
 <% end %>
 <br>
 <%= submit_tag('Calculate') %>

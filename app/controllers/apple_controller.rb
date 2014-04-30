@@ -183,12 +183,12 @@ class AppleController < ApplicationController
 			@b  = b = params[:param_b].to_f
 			@sl = sl= params[:param_SL].to_f 
 
-			d1 = "length=#{length}; width=#{width}; massP=#{massP}; yO2tn=#{yO2tn}; yO2t0=#{yO2t0}; \n"
-			d2 = "yCO2tn=#{yCO2tn}; yCO2t0=#{yCO2t0}; tn=#{tn}; t0=#{t0}; yO2in=#{yO2in};\n"
-			d3 = "yCO2in=#{yCO2in}; yO2out=#{yO2out}; yCO2out=#{yCO2out}; pcO2=#{pcO2}; pcCO2=#{pcCO2};\n"
-			d4 = "sorta=#{sorta}; treatement=#{treatement}; l=#{l}; a=#{a}; b=#{b} SL=#{sl}"
+			d1 = "length=#{length}; width=#{width}; massP=#{massP}; yO2tn=#{yO2tn}; yO2t0=#{yO2t0}; <br>"
+			d2 = "yCO2tn=#{yCO2tn}; yCO2t0=#{yCO2t0}; tn=#{tn}; t0=#{t0}; yO2in=#{yO2in};<br>"
+			d3 = "yCO2in=#{yCO2in}; yO2out=#{yO2out}; yCO2out=#{yCO2out}; pcO2=#{pcO2}; pcCO2=#{pcCO2};<br>"
+			d4 = "sorta=#{sorta}; treatement=#{treatement}; l=#{l}; a=#{a}; b=#{b} SL=#{sl}<br>"
 			
-			@debug = d1+d2+d3+d4			
+			@debug = "---DEBUG---<br>" + d1+d2+d3+d4
 
 			r3eq2_calc(length,width,massT,massP,pcO2,pcCO2,yO2out,yO2in,yO2tn,yO2t0,tn,t0,yCO2tn,yCO2t0,yCO2in,yCO2out,l,a,b,sl,sorta,treatement)
 		end
@@ -214,7 +214,7 @@ private
 		vtotal=(vA*1000)/468
 		logger.debug("Vtotal = #{vtotal}")
 		
-		vf=vtotal-(massT/massP)
+		vf=vtotal-(massT*1000/massP)
 		logger.debug("vf = #{vf}")
 
 		r_O2=(((pcO2 * vA * ((yO2out - yO2in)/100)) - (vf * ((yO2tn - yO2t0) / (tn-t0) /100)))) / massT
@@ -230,7 +230,7 @@ private
 		    -2.759410*gD + 42.138068*notreatment + 1.149526*asccia - 1.333054*casc - 0.517378*usndcasc
 		
 		@vA 	= vA
-		@vtotal = vtotal
+		@vtotal = vtotal*1000
 		@vf 	= vf
 		@r_O2 	= r_O2
 		@r_CO2 	= r_CO2
