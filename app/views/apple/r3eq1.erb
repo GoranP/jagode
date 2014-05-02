@@ -121,7 +121,7 @@
 <% unless @rezultat.nil? %>
 <br>Color change is: 
 <strong>
-	<div style="color:red">ΔE*ab = <%= number_with_precision @rezultat,:precision=>2  %> 	
+	<div style="color:red">ΔE<sup>*</sup><sub>ab</sub> = <%= number_with_precision @rezultat,:precision=>2  %> 	
 	</div>
 </strong>
 
@@ -144,18 +144,21 @@
 		<li><a href="/apple/eq4">Browning (CIELab) over storage time</a></li>
 		<li><a href="/apple/eq5">Sensory Evaluation</a></li>
 		<li><a href="/apple/st">Fresh-cut apple shelf-life</a></li>
+		<li><a href="/apple/r3eq1">Modified vs. normal atmosphere</a></li>
+		<li><a href="/apple/r3eq2">Browning (CIELab) modified vs. normal atmosphere</a></li>
+		
 	</ul>
 </nav>
 
 <section id="extra">
 			<h3>Subjective assessment of color difference by unaided average human eye:</h3>
 <p> 
-				ΔE*ab < 0.5 color difference hardly noticeable<br>
-				ΔE*ab = 0.5 – 1.5 slightly noticeable color difference<br>
-				ΔE*ab = 1.5 – 3.0 noticeable color difference<br>
-				ΔE*ab = 3.0 – 6.0 considerable color difference<br>
-				ΔE*ab = 6.0 – 12.0 large color difference<br>
-				ΔE*ab > 12.0 extremely large color difference<br> 
+				ΔE<sup>*</sup><sub>ab</sub> < 0.5 color difference hardly noticeable<br>
+				ΔE<sup>*</sup><sub>ab</sub> = 0.5 – 1.5 slightly noticeable color difference<br>
+				ΔE<sup>*</sup><sub>ab</sub> = 1.5 – 3.0 noticeable color difference<br>
+				ΔE<sup>*</sup><sub>ab</sub> = 3.0 – 6.0 considerable color difference<br>
+				ΔE<sup>*</sup><sub>ab</sub> = 6.0 – 12.0 large color difference<br>
+				ΔE<sup>*</sup><sub>ab</sub> > 12.0 extremely large color difference<br> 
 	<br>
 	<b>Reference:</b>
 	Reference: Yang, Y.M., J. Yu, N., (2012). Color Image Quality Assessment Based on CIEDE2000. Advances in Multimedia 2012, 1-7.

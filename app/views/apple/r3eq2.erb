@@ -99,25 +99,25 @@
 </tr>
 <tr>
 <td><%= label_tag(:MP,"Apple density:") %></td>
-<td><%= text_field_tag(:param_MP,@massP) %> <%= label_tag(:M_T,"[g/cm3]")%></td>
+<td><%= text_field_tag(:param_MP,@massP) %> <%= label_tag(:M_T,"[g/cm<sup>3</sup>]".html_safe)%></td>
 </tr>
 <tr>
-<td><%= label_tag(:yO2_tn,"volumetric concentration of O 2 @ time n:") %></td>
+<td><%= label_tag(:yO2_tn,"Do External Volumetric Concentration of O<sub>2</sub> in package (tn):".html_safe) %></td>
 <td><%= text_field_tag(:param_yO2_tn,@yO2tn) %> <%= label_tag(:percent,"[%]")%></td>
 </tr>
 
 <tr>
-<td><%= label_tag(:yO2_t0,"volumetric concentration of O 2 @ time 0:") %></td>
+<td><%= label_tag(:yO2_t0,"Do External Volumetric Concentration of O<sub>2</sub> in package (t0):".html_safe) %></td>
 <td><%= text_field_tag(:param_yO2_t0,@yO2t0) %> <%= label_tag(:percent,"[%]")%></td>
 </tr>
 
 <tr>
-<td><%= label_tag(:yCO2_tn,"volumetric concentration of CO 2 @ time n:") %></td>
+<td><%= label_tag(:yCO2_tn,"Do External Volumetric Concentration of CO<sub>2</sub> in package (tn):".html_safe) %></td>
 <td><%= text_field_tag(:param_yCO2_tn,@yCO2tn) %> <%= label_tag(:percent,"[%]")%></td>
 </tr>
 
 <tr>
-<td><%= label_tag(:yCO2_t0,"volumetric concentration of CO 2 @ time 0:") %></td>
+<td><%= label_tag(:yCO2_t0,"Do External Volumetric Concentration of CO<sub>2</sub> in package (t0):".html_safe) %></td>
 <td><%= text_field_tag(:param_yCO2_t0,@yCO2tn) %> <%= label_tag(:percent,"[%]")%></td>
 </tr>
 
@@ -153,12 +153,12 @@
 
 <tr>
 <td><%= label_tag(:PC_O2,"Permeance O<sub>2</sub>:".html_safe) %></td>
-<td><%= text_field_tag(:param_PC_O2,@pcO2) %> <%= label_tag(:percent,"[cm3/m×day×atm]")%></td>
+<td><%= text_field_tag(:param_PC_O2,@pcO2) %> <%= label_tag(:percent,"[cm<sup>3</sup>/m×day×atm]".html_safe)%></td>
 </tr>
 
 <tr>
 <td><%= label_tag(:PC_CO2,"Permeance CO<sub>2</sub>:".html_safe) %></td>
-<td><%= text_field_tag(:param_PC_CO2,@pcCO2) %> <%= label_tag(:percent,"[cm3/m×day×atm]")%></td>
+<td><%= text_field_tag(:param_PC_CO2,@pcCO2) %> <%= label_tag(:percent,"[cm<sup>3</sup>/m×day×atm]".html_safe)%></td>
 </tr>
 
 </table>
@@ -218,12 +218,10 @@
 <br>
 <strong>Color change is:</strong>
 <div style="color:red">
-<strong>ΔE*ab = </strong> <%= number_with_precision @dE,:precision=>2  %> [cm<sup>3</sup>]
+<strong>ΔE<sup>*</sup><sub>ab</sub> = </strong> <%= number_with_precision @dE,:precision=>2  %> [cm<sup>3</sup>]
 </div>
 <br>
 
-
-<%= @debug.html_safe %>
 
 <% end %>
 <br>
@@ -242,18 +240,22 @@
 		<li><a href="/apple/eq4">Browning (CIELab) over storage time</a></li>
 		<li><a href="/apple/eq5">Sensory Evaluation</a></li>
 		<li><a href="/apple/st">Fresh-cut apple shelf-life</a></li>
+		<li><a href="/apple/r3eq1">Modified vs. normal atmosphere</a></li>
+		<li><a href="/apple/r3eq2">Browning (CIELab) modified vs. normal atmosphere</a></li>
+
+
 	</ul>
 </nav>
 
 <section id="extra">
 			<h3>Subjective assessment of color difference by unaided average human eye:</h3>
 <p> 
-				ΔE*ab < 0.5 color difference hardly noticeable<br>
-				ΔE*ab = 0.5 – 1.5 slightly noticeable color difference<br>
-				ΔE*ab = 1.5 – 3.0 noticeable color difference<br>
-				ΔE*ab = 3.0 – 6.0 considerable color difference<br>
-				ΔE*ab = 6.0 – 12.0 large color difference<br>
-				ΔE*ab > 12.0 extremely large color difference<br> 
+				ΔE<sup>*</sup><sub>ab</sub> < 0.5 color difference hardly noticeable<br>
+				ΔE<sup>*</sup><sub>ab</sub> = 0.5 – 1.5 slightly noticeable color difference<br>
+				ΔE<sup>*</sup><sub>ab</sub> = 1.5 – 3.0 noticeable color difference<br>
+				ΔE<sup>*</sup><sub>ab</sub> = 3.0 – 6.0 considerable color difference<br>
+				ΔE<sup>*</sup><sub>ab</sub> = 6.0 – 12.0 large color difference<br>
+				ΔE<sup>*</sup><sub>ab</sub> > 12.0 extremely large color difference<br> 
 	<br>
 	<b>Reference:</b>
 	Reference: Yang, Y.M., J. Yu, N., (2012). Color Image Quality Assessment Based on CIEDE2000. Advances in Multimedia 2012, 1-7.
