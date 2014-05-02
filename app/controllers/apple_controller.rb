@@ -211,7 +211,7 @@ private
 		vA = length * width
 		logger.debug("A = #{vA}")
 		
-		vtotal=(vA*1000)/468
+		vtotal=(10000*vA*1000)/468
 		logger.debug("Vtotal = #{vtotal}")
 		
 		vf=vtotal-(massT*1000/massP)
@@ -230,7 +230,7 @@ private
 		    -2.759410*gD + 42.138068*notreatment + 1.149526*asccia - 1.333054*casc - 0.517378*usndcasc
 		
 		@vA 	= vA
-		@vtotal = vtotal*1000
+		@vtotal = vtotal
 		@vf 	= vf
 		@r_O2 	= r_O2
 		@r_CO2 	= r_CO2
