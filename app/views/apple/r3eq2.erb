@@ -102,52 +102,52 @@
 <td><%= text_field_tag(:param_MP,@massP) %> <%= label_tag(:M_T,"[g/cm<sup>3</sup>]".html_safe)%></td>
 </tr>
 <tr>
-<td><%= label_tag(:yO2_tn,"Do External Volumetric Concentration of O<sub>2</sub> in package (tn):".html_safe) %></td>
+<td><%= label_tag(:yO2_tn,"Volumetric Concentration of O<sub>2</sub> in package (t<sub>n</sub>):".html_safe) %></td>
 <td><%= text_field_tag(:param_yO2_tn,@yO2tn) %> <%= label_tag(:percent,"[%]")%></td>
 </tr>
 
 <tr>
-<td><%= label_tag(:yO2_t0,"Do External Volumetric Concentration of O<sub>2</sub> in package (t0):".html_safe) %></td>
+<td><%= label_tag(:yO2_t0,"Volumetric Concentration of O<sub>2</sub> in package (t<sub>0</sub>):".html_safe) %></td>
 <td><%= text_field_tag(:param_yO2_t0,@yO2t0) %> <%= label_tag(:percent,"[%]")%></td>
 </tr>
 
 <tr>
-<td><%= label_tag(:yCO2_tn,"Do External Volumetric Concentration of CO<sub>2</sub> in package (tn):".html_safe) %></td>
+<td><%= label_tag(:yCO2_tn,"Volumetric Concentration of CO<sub>2</sub> in package (t<sub>n</sub>):".html_safe) %></td>
 <td><%= text_field_tag(:param_yCO2_tn,@yCO2tn) %> <%= label_tag(:percent,"[%]")%></td>
 </tr>
 
 <tr>
-<td><%= label_tag(:yCO2_t0,"Do External Volumetric Concentration of CO<sub>2</sub> in package (t0):".html_safe) %></td>
-<td><%= text_field_tag(:param_yCO2_t0,@yCO2tn) %> <%= label_tag(:percent,"[%]")%></td>
+<td><%= label_tag(:yCO2_t0,"Volumetric Concentration of CO<sub>2</sub> in package (t<sub>0</sub>):".html_safe) %></td>
+<td><%= text_field_tag(:param_yCO2_t0,@yCO2t0) %> <%= label_tag(:percent,"[%]")%></td>
 </tr>
 
 <tr>
-<td><%= label_tag(:tn,"time n:") %></td>
+<td><%= label_tag(:tn,"Time n:") %></td>
 <td><%= text_field_tag(:param_tn,@tn) %> <%= label_tag(:percent,"[days]")%></td>
 </tr>
 
 <tr>
-<td><%= label_tag(:tn,"time 0:") %></td>
+<td><%= label_tag(:tn,"Time 0:") %></td>
 <td><%= text_field_tag(:param_t0,@t0) %> <%= label_tag(:percent,"[days]")%></td>
 </tr>
 
 <tr>
-<td><%= label_tag(:yO2_in,"volumetric concentration O<sub>2</sub> in package:".html_safe) %></td>
+<td><%= label_tag(:yO2_in,"Volumetric Concentration O<sub>2</sub> in package:".html_safe) %></td>
 <td><%= text_field_tag(:param_yO2_in,@yO2in) %> <%= label_tag(:percent,"[%]")%></td>
 </tr>
 
 <tr>
-<td><%= label_tag(:yCO2_in,"volumetric concentration CO<sub>2</sub> in package:".html_safe) %></td>
+<td><%= label_tag(:yCO2_in,"Volumetric Concentration CO<sub>2</sub> in package:".html_safe) %></td>
 <td><%= text_field_tag(:param_yCO2_in,@yCO2in) %> <%= label_tag(:percent,"[%]")%></td>
 </tr>
 
 <tr>
-<td><%= label_tag(:yO2_out,"external volumetric concentration O<sub>2</sub> in package:".html_safe) %></td>
+<td><%= label_tag(:yO2_out,"External Volumetric Concentration O<sub>2</sub> in package:".html_safe) %></td>
 <td><%= text_field_tag(:param_yO2_out,@yO2out) %> <%= label_tag(:percent,"[%]")%></td>
 </tr>
 
 <tr>
-<td><%= label_tag(:yCO2_out,"external volumetric concentration CO<sub>2</sub> in package:".html_safe) %></td>
+<td><%= label_tag(:yCO2_out,"External Volumetric Concentration CO<sub>2</sub> in package:".html_safe) %></td>
 <td><%= text_field_tag(:param_yCO2_out,@yCO2out) %> <%= label_tag(:percent,"[%]")%></td>
 </tr>
 
@@ -208,17 +208,17 @@
 <strong>O<sub>2</sub> consumption is:</strong> <%= number_with_precision @r_O2,:precision=>2  %> [cm<sup>3</sup>/kg×day×atm]
 </div>
 <div style="color:red">
-<strong>CO<sub>2</sub> consumption is:</strong> <%= number_with_precision @r_CO2,:precision=>2  %> [cm<sup>3</sup>/kg×day×atm]
+<strong>CO<sub>2</sub> production is:</strong> <%= number_with_precision @r_CO2,:precision=>2  %> [cm<sup>3</sup>/kg×day×atm]
 </div>
 
 <div style="color:red">
-<strong>Respiration quotient is:</strong> <%= number_with_precision @rQ,:precision=>2  %> [cm<sup>3</sup>]
+<strong>Respiration quotient is:</strong> <%= number_with_precision @rQ,:precision=>2  %> 
 </div>
 
 <br>
 <strong>Color change is:</strong>
 <div style="color:red">
-<strong>ΔE<sup>*</sup><sub>ab</sub> = </strong> <%= number_with_precision @dE,:precision=>2  %> [cm<sup>3</sup>]
+<strong>ΔE<sup>*</sup><sub>ab</sub> = </strong> <%= number_with_precision @dE,:precision=>2  %> 
 </div>
 <br>
 

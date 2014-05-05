@@ -161,7 +161,7 @@ class AppleController < ApplicationController
 			@length = length = params[:param_LP].to_f
 			@width  = width  = params[:param_WP].to_f
 			@massT  = massT  = params[:param_MT].to_f			
-			@massP  = massP  = params[:param_MP].to_f
+			@massP  = massP  = params[:param_MP].to_f 
 			@yO2tn  = yO2tn  = params[:param_yO2_tn].to_f
 			@yO2t0  = yO2t0  = params[:param_yO2_t0].to_f
 			@yCO2tn = yCO2tn = params[:param_yCO2_tn].to_f
@@ -220,7 +220,7 @@ private
 		r_O2=(((pcO2 * vA * ((yO2out - yO2in)/100)) - (vf * ((yO2tn - yO2t0) / (tn-t0) /100)))) / massT
 		logger.debug("r_O2 = #{r_O2}")
 		
-		r_CO2=(((vf * ( ((yCO2tn-yCO2t0)/(tn-t0)/100))))-(pcO2*vA*(yCO2in - yCO2out) / 100)) / massT
+		r_CO2=(((vf * ( ((yCO2tn-yCO2t0)/(tn-t0)/100))))-(pcCO2*vA*(yCO2in - yCO2out) / 100)) / massT
 		logger.debug("r_CO2 = #{r_CO2}")
 
 		rQ=(r_CO2 / r_O2).abs()
