@@ -217,15 +217,34 @@ private
 		
 		vf=vtotal-(massT*1000/massP)
 		logger.debug("vf = #{vf}")
+		@debug = @debug + "<br>" + "vf = #{vf}"
 
-		r_O2=(((pcO2 * vA * ((yO2out - yO2in)/100)) - (vf * ((yO2tn - yO2t0) / (tn-t0) /100)))) / massT
-		logger.debug("r_O2 = #{r_O2}")
-		
+		pr_O2_1 = pcO2 * vA * (yO2out - yO2in)/100
+		pr_O2_2 = (vf/100)*( (yO2tn - yO2t0) / (tn - t0) )
+		pr_O2_3 = pr_O2_1  - pr_O2_2		
+		r_O2 =  pr_O2_3 / massT
+
+		@debug = @debug + "<br><br>" + "pr_O2_1 = #{pr_O2_1}"
+		@debug = @debug + "<br>" + "pr_O2_2 = #{pr_O2_2}"
+		@debug = @debug + "<br>" + "pr_O2_3 = #{pr_O2_3}"
 		@debug = @debug + "<br>" + "r_O2 = #{r_O2}"
 
-		r_CO2=(((vf * ( ((yCO2tn-yCO2t0)/(tn-t0)/100))))-(pcCO2*vA*(yCO2in - yCO2out) / 100)) / massT
-		logger.debug("r_CO2 = #{r_CO2}")
+		pr_CO2_1 = (vf/100)*( (yCO2tn - yCO2t0)/(tn-t0) )
+		pr_CO2_2 = pcCO2*vA*( (yCO2in - yCO2out)/100 ) 
+		pr_CO2_3 = pr_CO2_1 - pr_CO2_2
+		r_CO2 = pr_CO2_3/massT
+		@debug = @debug + "<br><br>" + "pr_CO2_1 = #{pr_CO2_1}"
+		@debug = @debug + "<br>" + "pr_CO2_2 = #{pr_CO2_2}"
+		@debug = @debug + "<br>" + "pr_CO2_3 = #{pr_CO2_3}"
 		@debug = @debug + "<br>" + "r_CO2 = #{r_CO2}"
+		
+
+		
+		
+		#r_CO2=(((vf * ((yCO2tn - yCO2t0)/(tn-t0)/100))) -(pcCO2 * vA * ((yCO2in - yCO2out) / 100))) / massT
+		#r_CO2=(((vf * ( ((yCO2tn-yCO2t0)/(tn-t0)/100))))-(pcCO2*vA*(yCO2in - yCO2out) / 100)) / massT
+		logger.debug("r_CO2 = #{r_CO2}")
+		
 
 		rQ=(r_CO2 / r_O2).abs()
 		logger.debug("rQ = #{rQ}")
