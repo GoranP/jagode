@@ -291,6 +291,7 @@ private
 		"
 
 		@debug = @debug + "<br>" + "dE = #{dE}"
+		@debug =""
 		
 		@vA 	= vA
 		@vtotal = vtotal
