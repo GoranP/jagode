@@ -230,8 +230,17 @@ private
 		rQ=(r_CO2 / r_O2).abs()
 		logger.debug("rQ = #{rQ}")
 
-		dE= 54.504535 - 0.829271*l-0.009992*(10**a) + 0.859552*b - 0.224326*sl + 1.292377*Math.sin(r_CO2) + 
-		    -2.759410*gD + 42.138068*notreatment + 1.149526*asccia - 1.333054*casc - 0.517378*usndcasc
+		dE=  54.504535 +
+			-0.829271*l + 
+			-0.009992*(10**a) + 
+			0.859552*b +
+			- 0.224326*sl + 
+			1.292377*Math.sin(r_CO2) + 
+		    -2.759410*gD + 
+		    42.138068*notreatment + 
+		    1.149526*asccia + 
+		    - 1.333054*casc +
+		    - 0.517378*usndcasc
 		
 		@vA 	= vA
 		@vtotal = vtotal
