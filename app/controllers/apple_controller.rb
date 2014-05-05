@@ -210,6 +210,7 @@ private
 
 		vA = length * width
 		logger.debug("A = #{vA}")
+
 		
 		vtotal=(10000*vA*1000)/468
 		logger.debug("Vtotal = #{vtotal}")
@@ -220,8 +221,11 @@ private
 		r_O2=(((pcO2 * vA * ((yO2out - yO2in)/100)) - (vf * ((yO2tn - yO2t0) / (tn-t0) /100)))) / massT
 		logger.debug("r_O2 = #{r_O2}")
 		
+		@debug = @debug + "<br>" + "r_O2 = #{r_O2}"
+
 		r_CO2=(((vf * ( ((yCO2tn-yCO2t0)/(tn-t0)/100))))-(pcCO2*vA*(yCO2in - yCO2out) / 100)) / massT
 		logger.debug("r_CO2 = #{r_CO2}")
+		@debug = @debug + "<br>" + "r_CO2 = #{r_CO2}"
 
 		rQ=(r_CO2 / r_O2).abs()
 		logger.debug("rQ = #{rQ}")
