@@ -1,5 +1,86 @@
 class AppleController < ApplicationController
 	layout "apple.html.erb"
+	before_action :set_default_params, :only => [:r3eq2,:r5eq14]
+
+	def set_default_params
+		@length = 0.2 if params[:param_LP].nil?
+		@width  = 0.2 if params[:param_WP].nil?
+		@massT  = 0.2 if params[:param_MT].nil?
+		@massP  = 0.464 if params[:param_MP].nil?
+
+
+		@yO2tn  =  params[:param_yO2_tn].to_f
+		@yO2t0  =  params[:param_yO2_t0].to_f
+		@yCO2tn =  params[:param_yCO2_tn].to_f
+		@yCO2t0 =  params[:param_yCO2_t0].to_f
+		@tn  	=  0.5 if params[:param_tn].nil?
+		@t0 	=  params[:param_t0].to_f
+		@yO2in 	=  params[:param_yO2_in].to_f
+		@yCO2in =  params[:param_yCO2_in].to_f
+		@yO2out =  20.95  if params[:param_yO2_out].nil?
+		@yCO2out=  0.03   if params[:param_yCO2_out].nil?
+		@pcO2   =  633.0  if params[:param_PC_O2].nil?
+		@pcCO2  =  331.0  if params[:param_PC_CO2].nil?
+
+
+		@pSSC = params[:param_SSC].to_f == 0.0 ? (10.0**-14).to_f : params[:param_SSC].to_f
+
+
+		@sorta 		=  1 if params[:sorta].nil?
+		@treatement =  1 if params[:treatement].nil?
+
+		@l  =  params[:param_L].to_f
+		@a  =  params[:param_a].to_f
+		@b  =  params[:param_b].to_f
+		@sl =  params[:param_SL].to_f 
+		
+		logger.debug(params)
+		set_post_params
+	end
+
+	def set_post_params
+
+		if request.post?
+			logger.debug(params)
+
+			@length = length = params[:param_LP].to_f
+			@width  = width  = params[:param_WP].to_f
+			@massT  = massT  = params[:param_MT].to_f			
+			@massP  = massP  = params[:param_MP].to_f 
+			@yO2tn  = yO2tn  = params[:param_yO2_tn].to_f
+			@yO2t0  = yO2t0  = params[:param_yO2_t0].to_f
+			@yCO2tn = yCO2tn = params[:param_yCO2_tn].to_f
+			@yCO2t0 = yCO2t0 = params[:param_yCO2_t0].to_f
+			@tn  	= tn     = params[:param_tn].to_f
+			@t0 	= t0     = params[:param_t0].to_f
+			@yO2in 	= yO2in  = params[:param_yO2_in].to_f
+			@yCO2in = yCO2in = params[:param_yCO2_in].to_f
+			@yO2out = yO2out = params[:param_yO2_out].to_f
+			@yCO2out= yCO2out = params[:param_yCO2_out].to_f
+			@pcO2   = pcO2   = params[:param_PC_O2].to_f
+			@pcCO2  = pcCO2  = params[:param_PC_CO2].to_f
+
+			@pSSC = params[:param_SSC].to_f
+
+			@sorta 		= sorta 		= params[:sorta].to_i
+			@treatement = treatement 	= params[:treatement].to_i
+
+			@l  = l = params[:param_L].to_f
+			@a  = a = params[:param_a].to_f
+			@b  = b = params[:param_b].to_f
+			@sl = sl= params[:param_SL].to_f 
+
+			d1 = "length=#{length}; width=#{width}; massP=#{massP}; yO2tn=#{yO2tn}; yO2t0=#{yO2t0}; <br>"
+			d2 = "yCO2tn=#{yCO2tn}; yCO2t0=#{yCO2t0}; tn=#{tn}; t0=#{t0}; yO2in=#{yO2in};<br>"
+			d3 = "yCO2in=#{yCO2in}; yO2out=#{yO2out}; yCO2out=#{yCO2out}; pcO2=#{pcO2}; pcCO2=#{pcCO2};<br>"
+			d4 = "sorta=#{sorta}; treatement=#{treatement}; l=#{l}; a=#{a}; b=#{b} SL=#{sl} SSC=#{@pSSC}<br>"
+			
+			@debug = "---DEBUG---<br>" + d1+d2+d3+d4
+		end
+
+	end
+
+
 	
 	def index
 	end
@@ -126,77 +207,124 @@ class AppleController < ApplicationController
 	end
 
 	def r3eq2
-		@length = 0.2 if params[:param_LP].nil?
-		@width  = 0.2 if params[:param_WP].nil?
-		@massT  = 0.2 if params[:param_MT].nil?
-		@massP  = 0.464 if params[:param_MP].nil?
-
-
-		@yO2tn  =  params[:param_yO2_tn].to_f
-		@yO2t0  =  params[:param_yO2_t0].to_f
-		@yCO2tn =  params[:param_yCO2_tn].to_f
-		@yCO2t0 =  params[:param_yCO2_t0].to_f
-		@tn  	=  0.5 if params[:param_tn].nil?
-		@t0 	=  params[:param_t0].to_f
-		@yO2in 	=  params[:param_yO2_in].to_f
-		@yCO2in =  params[:param_yCO2_in].to_f
-		@yO2out =  20.95  if params[:param_yO2_out].nil?
-		@yCO2out=  0.03   if params[:param_yCO2_out].nil?
-		@pcO2   =  633.0  if params[:param_PC_O2].nil?
-		@pcCO2  =  331.0  if params[:param_PC_CO2].nil?
-
-		@sorta 		=  1 if params[:sorta].nil?
-		@treatement =  1 if params[:treatement].nil?
-
-		@l  =  params[:param_L].to_f
-		@a  =  params[:param_a].to_f
-		@b  =  params[:param_b].to_f
-		@sl =  params[:param_SL].to_f 
-
-
 
 		if request.post?
-			logger.debug(params)
-
-			@length = length = params[:param_LP].to_f
-			@width  = width  = params[:param_WP].to_f
-			@massT  = massT  = params[:param_MT].to_f			
-			@massP  = massP  = params[:param_MP].to_f 
-			@yO2tn  = yO2tn  = params[:param_yO2_tn].to_f
-			@yO2t0  = yO2t0  = params[:param_yO2_t0].to_f
-			@yCO2tn = yCO2tn = params[:param_yCO2_tn].to_f
-			@yCO2t0 = yCO2t0 = params[:param_yCO2_t0].to_f
-			@tn  	= tn     = params[:param_tn].to_f
-			@t0 	= t0     = params[:param_t0].to_f
-			@yO2in 	= yO2in  = params[:param_yO2_in].to_f
-			@yCO2in = yCO2in = params[:param_yCO2_in].to_f
-			@yO2out = yO2out = params[:param_yO2_out].to_f
-			@yCO2out= yCO2out = params[:param_yCO2_out].to_f
-			@pcO2   = pcO2   = params[:param_PC_O2].to_f
-			@pcCO2  = pcCO2  = params[:param_PC_CO2].to_f
-
-			@sorta 		= sorta 		= params[:sorta].to_i
-			@treatement = treatement 	= params[:treatement].to_i
-
-			@l  = l = params[:param_L].to_f
-			@a  = a = params[:param_a].to_f
-			@b  = b = params[:param_b].to_f
-			@sl = sl= params[:param_SL].to_f 
-
-			d1 = "length=#{length}; width=#{width}; massP=#{massP}; yO2tn=#{yO2tn}; yO2t0=#{yO2t0}; <br>"
-			d2 = "yCO2tn=#{yCO2tn}; yCO2t0=#{yCO2t0}; tn=#{tn}; t0=#{t0}; yO2in=#{yO2in};<br>"
-			d3 = "yCO2in=#{yCO2in}; yO2out=#{yO2out}; yCO2out=#{yCO2out}; pcO2=#{pcO2}; pcCO2=#{pcCO2};<br>"
-			d4 = "sorta=#{sorta}; treatement=#{treatement}; l=#{l}; a=#{a}; b=#{b} SL=#{sl}<br>"
-			
-			@debug = "---DEBUG---<br>" + d1+d2+d3+d4
-
-			r3eq2_calc(length,width,massT,massP,pcO2,pcCO2,yO2out,yO2in,yO2tn,yO2t0,tn,t0,yCO2tn,yCO2t0,yCO2in,yCO2out,l,a,b,sl,sorta,treatement)
+			r3eq2_calc(@length,@width,@massT,@massP,@pcO2,@pcCO2,@yO2out,@yO2in,@yO2tn,@yO2t0,@tn,@t0,@yCO2tn,@yCO2t0,@yCO2in,@yCO2out,@l,@a,@b,@sl,@sorta,@treatement)
 		end
 
 	end
 
+	def r5eq14
+		if request.post?
+			r5eq14_calc(@length,@width,@massT,@massP,@pcO2,@pcCO2,@yO2out,@yO2in,@yO2tn,@yO2t0,@tn,@t0,@yCO2tn,@yCO2t0,@yCO2in,@yCO2out,@l,@a,@b,@sl,@sorta,@treatement,@pSSC)
+		end
+	end
+
+
 
 private	
+
+	def r5eq14_calc(length,width,massT,massP,pcO2,pcCO2,yO2out,yO2in,yO2tn,yO2t0,tn,t0,yCO2tn,yCO2t0,yCO2in,yCO2out,l,a,b,sl,sorta,treatement,sSC)
+
+		vA = length * width
+		logger.debug("A = #{vA}")
+
+		
+		vtotal=(10000*vA*1000)/468
+		logger.debug("Vtotal = #{vtotal}")
+		
+		vf=vtotal-(massT*1000/massP)
+		logger.debug("vf = #{vf}")
+		@debug = @debug + "<br>" + "vf = #{vf}"
+
+		pr_O2_1 = pcO2 * vA * (yO2out - yO2in)/100.0
+		pr_O2_2 = (vf/100.0)*( (yO2tn - yO2t0) / (tn - t0) )
+		pr_O2_3 = pr_O2_1.to_f  - pr_O2_2.to_f
+		r_O2 =  pr_O2_3.to_f / massT.to_f
+
+		@debug = @debug + "<br><br>" + "pr_O2_1 = #{pr_O2_1}"
+		@debug = @debug + "<br>" + "pr_O2_2 = #{pr_O2_2}"
+		@debug = @debug + "<br>" + "pr_O2_3 = #{pr_O2_3}"
+		@debug = @debug + "<br>" + "r_O2 = #{r_O2}"
+
+		pr_CO2_1 = (vf/100.0)*( (yCO2tn - yCO2t0)/(tn-t0) )
+		pr_CO2_2 = pcCO2*vA*( (yCO2in - yCO2out)/100.0) 
+		pr_CO2_3 = pr_CO2_1.to_f - pr_CO2_2.to_f
+		r_CO2 = pr_CO2_3.to_f/massT.to_f
+		@debug = @debug + "<br><br>" + "pr_CO2_1 = #{pr_CO2_1}"
+		@debug = @debug + "<br>" + "pr_CO2_2 = #{pr_CO2_2}"
+		@debug = @debug + "<br>" + "pr_CO2_3 = #{pr_CO2_3}"
+		@debug = @debug + "<br>" + "r_CO2 = #{r_CO2}"		
+
+		rQ=(r_CO2 / r_O2).abs()
+
+		@debug = @debug + "<br>" + "rQ = #{rQ}"		
+		
+		#što ide pod logaritam moramo maknuti nule 
+		a 		= a.to_f 	 == 0 ? 10**-14 : a.to_f
+		sl 		= sl.to_f 	 == 0 ? 10**-14 : sl.to_f
+		yO2in   = yO2in.to_f == 0 ? (10**-14).to_f : yO2in.to_f
+		yCO2in  = yCO2in.to_f== 0 ? (10**-14).to_f : yCO2in.to_f
+		r_O2 	= r_O2.to_f  == 0 ? 10**-14 : r_O2.to_f
+		r_CO2 	= r_CO2.to_f == 0 ? 10**-14 : r_CO2.to_f
+		sSC 	= sSC.to_f == 0 ? 10**-14 : sSC.to_f
+		
+		@debug = @debug + "<br>" + "a   = #{a}"		
+		@debug = @debug + "<br>" + "sl  = #{sl}"		
+		@debug = @debug + "<br>" + "yO2in  = #{yO2in}"		
+		@debug = @debug + "<br>" + "yCO2in  = #{yCO2in}"	
+		@debug = @debug + "<br>" + "r_CO2  = #{r_CO2}"	
+		@debug = @debug + "<br>" + "r_O2  = #{r_O2}"
+		@debug = @debug + "<br>" + "SSC  = #{sSC}"
+
+
+
+		log_amb_r_O2 = 36.98799+1.27433*Math.log10(a)+5.64896*Math.log10(sl)-5.15887*Math.log10(yO2in)-11.55798*Math.log10(r_O2)-14.02838*Math.log10(sSC)
+		@amb_r_O2 = ((10**log_amb_r_O2 )<0 ? 0.0 : (10**log_amb_r_O2)).round(2)
+		
+		@debug = @debug + "<br><br>" + "log_amb_r_O2 = 36.98799+1.27433*Math.log10(a)+5.64896*Math.log10(sl)-5.15887*Math.log10(yO2in)-11.55798*Math.log10(r_O2)-14.02838*Math.log10(sSC)"
+		@debug = @debug + "<br>" + "log_amb_r_O2 = 36.98799+1.27433*Math.log10(#{a})+5.64896*Math.log10(#{sl})-5.15887*Math.log10(#{yO2in})-11.55798*Math.log10(#{r_O2})-14.02838*Math.log10(#{sSC})"
+		@debug = @debug + "<br>" + "<strong>log_amb_r_O2  = #{log_amb_r_O2}</strong>"
+
+		log_amb_r_CO2 = 13.489840 + 0.813521*Math.log10(a)+ 5.840625*Math.log10(sl)-2.571925*Math.log10(yCO2in)-11.55798*Math.log10(r_CO2)-13.490741*Math.log10(sSC)
+		@amb_r_CO2 = ((10**log_amb_r_CO2 )<0 ? 0.0 : (10**log_amb_r_CO2 )).round(2)
+		
+		@debug = @debug + "<br><br>" + "log_amb_r_CO2 = 13.489840 + 0.813521*Math.log10(a)+ 5.840625*Math.log10(sl)-2.571925*Math.log10(yCO2in)-11.55798*Math.log10(r_CO2)-13.490741*Math.log10(sSC)"
+		@debug = @debug + "<br>" + "log_amb_r_CO2 = 13.489840 + 0.813521*Math.log10(#{a})+ 5.840625*Math.log10(#{sl})-2.571925*Math.log10(#{yCO2in})-11.55798*Math.log10(#{r_CO2})-13.490741*Math.log10(#{sSC})"
+		@debug = @debug + "<br>" + "<strong>log_amb_r_CO2  = #{log_amb_r_CO2}</strong>"
+
+		log_ebac_r_O2 = 18.130096+2.939652*Math.log10(sl)-5.687815*Math.log10(yO2in)-10.021691*Math.log10(r_O2)
+		@ebac_r_O2 = ((10**log_ebac_r_O2)<0 ? 0.0 : (10**log_ebac_r_O2)).round(2)
+
+		@debug = @debug + "<br><br>" + "log_ebac_r_O2 = 18.130096+2.939652*Math.log10(sl)-5.687815*Math.log10(yO2in)-10.021691*Math.log10(r_O2)"
+		@debug = @debug + "<br>" + "log_ebac_r_O2 = 18.130096+2.939652*Math.log10(#{sl})-5.687815*Math.log10(#{yO2in})-10.021691*Math.log10(#{r_O2})"
+		@debug = @debug + "<br>" + "<strong>log_ebac_r_O2  = #{log_ebac_r_O2}</strong>"
+
+
+		log_ebac_r_CO2 = -3.182664+2.093291*Math.log10(sl)+5.476442*Math.log10(yCO2in) -2.042063*Math.log10(r_CO2)
+		@ebac_r_CO2 = ((10**log_ebac_r_CO2)<0 ? 0.0 : (10**log_ebac_r_CO2)).round(2)
+		
+		@debug = @debug + "<br><br>" +"log_ebac_r_CO2 = -3.182664+2.093291*Math.log10(sl)+5.476442*Math.log10(yCO2in) -2.042063*Math.log10(r_CO2)"
+		@debug = @debug + "<br>" + "log_ebac_r_CO2 = -3.182664+2.093291*Math.log10(#{sl})+5.476442*Math.log10(#{yCO2in})-2.042063*Math.log10(#{r_CO2})"
+		@debug = @debug + "<br>" + "<strong>log_ebac_r_CO2  = #{log_ebac_r_CO2}</strong>"
+
+		@debug = @debug + "<br><br>" + "@amb_r_O2 = #{@amb_r_O2}"
+		@debug = @debug + "<br>" + "@amb_r_CO2 = #{@amb_r_CO2}"
+		@debug = @debug + "<br>" + "@ebac_r_O2 = #{@ebac_r_O2}"
+		@debug = @debug + "<br>" + "@ebac_r_CO2 = #{@ebac_r_CO2}"
+		#@debug =""
+		
+		@vA 	= vA
+		@vtotal = vtotal
+		@vf 	= vf
+		@r_O2 	= r_O2
+		@r_CO2 	= r_CO2
+		@rQ 	= rQ
+
+		
+
+	end
+
 	
 	def r3eq2_calc(length,width,massT,massP,pcO2,pcCO2,yO2out,yO2in,yO2tn,yO2t0,tn,t0,yCO2tn,yCO2t0,yCO2in,yCO2out,l,a,b,sl,sorta,treatement)
 		
