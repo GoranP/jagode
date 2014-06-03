@@ -286,11 +286,12 @@ private
 		@debug = @debug + "<br>" + "log_amb_r_O2 = 36.98799+1.27433*Math.log10(#{a})+5.64896*Math.log10(#{sl})-5.15887*Math.log10(#{yO2in})-11.55798*Math.log10(#{r_O2})-14.02838*Math.log10(#{sSC})"
 		@debug = @debug + "<br>" + "<strong>log_amb_r_O2  = #{log_amb_r_O2}</strong>"
 
-		log_amb_r_CO2 = 13.489840 + 0.813521*Math.log10(a)+ 5.840625*Math.log10(sl)-2.571925*Math.log10(yCO2in)-11.55798*Math.log10(r_CO2)-13.490741*Math.log10(sSC)
+		log_amb_r_CO2 = 13.489840 + 0.813521*Math.log10(a)+ 4.624729*Math.log10(sl)- 5.840625*Math.log10(yCO2in)-2.571925*Math.log10(r_CO2)-13.490741*Math.log10(sSC)
+		#log_amb_r_CO2 = 13.489840 + 0.813521*Math.log10(a)+ 5.840625*Math.log10(sl)-2.571925*Math.log10(yCO2in)-11.55798*Math.log10(r_CO2)-13.490741*Math.log10(sSC)
 		@amb_r_CO2 = ((10**log_amb_r_CO2 )<0 ? 0.0 : (10**log_amb_r_CO2 )).round(2)
 		
-		@debug = @debug + "<br><br>" + "log_amb_r_CO2 = 13.489840 + 0.813521*Math.log10(a)+ 5.840625*Math.log10(sl)-2.571925*Math.log10(yCO2in)-11.55798*Math.log10(r_CO2)-13.490741*Math.log10(sSC)"
-		@debug = @debug + "<br>" + "log_amb_r_CO2 = 13.489840 + 0.813521*Math.log10(#{a})+ 5.840625*Math.log10(#{sl})-2.571925*Math.log10(#{yCO2in})-11.55798*Math.log10(#{r_CO2})-13.490741*Math.log10(#{sSC})"
+		@debug = @debug + "<br><br>" + "log_amb_r_CO2 = 13.489840 + 0.813521*Math.log10(a)+ 4.624729*Math.log10(sl)- 5.840625*Math.log10(yCO2in)-2.571925*Math.log10(r_CO2)-13.490741*Math.log10(sSC)"
+		@debug = @debug + "<br>" + "log_amb_r_CO2 = 13.489840 + 0.813521*Math.log10(#{a})+ 4.624729*Math.log10(#{sl})- 5.840625*Math.log10(#{yCO2in})-2.571925*Math.log10(#{r_CO2})-13.490741*Math.log10(#{sSC})"
 		@debug = @debug + "<br>" + "<strong>log_amb_r_CO2  = #{log_amb_r_CO2}</strong>"
 
 		log_ebac_r_O2 = 18.130096+2.939652*Math.log10(sl)-5.687815*Math.log10(yO2in)-10.021691*Math.log10(r_O2)
