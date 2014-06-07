@@ -286,11 +286,11 @@ private
 		@debug = @debug + "<br>" + "log_amb_r_O2 = 36.98799+1.27433*Math.log10(#{a})+5.64896*Math.log10(#{sl})-5.15887*Math.log10(#{yO2in})-11.55798*Math.log10(#{r_O2})-14.02838*Math.log10(#{sSC})"
 		@debug = @debug + "<br>" + "<strong>log_amb_r_O2  = #{log_amb_r_O2}</strong>"
 
-		log_amb_r_CO2 = 13.489840 + 0.813521*Math.log10(a)+ 4.624729*Math.log10(sl)- 5.840625*Math.log10(yCO2in)-2.571925*Math.log10(r_CO2)-13.490741*Math.log10(sSC)
+		log_amb_r_CO2 = 13.489840 + 0.813521*Math.log10(a)+ 4.624729*Math.log10(sl)+5.840625*Math.log10(yCO2in)-2.571925*Math.log10(r_CO2)-13.490741*Math.log10(sSC)
 		#log_amb_r_CO2 = 13.489840 + 0.813521*Math.log10(a)+ 5.840625*Math.log10(sl)-2.571925*Math.log10(yCO2in)-11.55798*Math.log10(r_CO2)-13.490741*Math.log10(sSC)
 		@amb_r_CO2 = ((10**log_amb_r_CO2 )<0 ? 0.0 : (10**log_amb_r_CO2 )).round(2)
 		
-		@debug = @debug + "<br><br>" + "log_amb_r_CO2 = 13.489840 + 0.813521*Math.log10(a)+ 4.624729*Math.log10(sl)- 5.840625*Math.log10(yCO2in)-2.571925*Math.log10(r_CO2)-13.490741*Math.log10(sSC)"
+		@debug = @debug + "<br><br>" + "log_amb_r_CO2 = 13.489840 + 0.813521*Math.log10(a)+ 4.624729*Math.log10(sl)+ 5.840625*Math.log10(yCO2in)-2.571925*Math.log10(r_CO2)-13.490741*Math.log10(sSC)"
 		@debug = @debug + "<br>" + "log_amb_r_CO2 = 13.489840 + 0.813521*Math.log10(#{a})+ 4.624729*Math.log10(#{sl})- 5.840625*Math.log10(#{yCO2in})-2.571925*Math.log10(#{r_CO2})-13.490741*Math.log10(#{sSC})"
 		@debug = @debug + "<br>" + "<strong>log_amb_r_CO2  = #{log_amb_r_CO2}</strong>"
 
@@ -338,11 +338,11 @@ private
 		usndcasc	= treatement == 4 ? 1 : 0
 
 		vA = length * width
-		logger.debug("A = #{vA}")
+		@debug = @debug + "<br>" + "A = #{vA}"
 
 		
 		vtotal=(10000*vA*1000)/468
-		logger.debug("Vtotal = #{vtotal}")
+		@debug = @debug + "<br>" + "Vtotal = #{vtotal}"
 		
 		vf=vtotal-(massT*1000/massP)
 		logger.debug("vf = #{vf}")
@@ -362,21 +362,25 @@ private
 		pr_CO2_2 = pcCO2*vA*( (yCO2in - yCO2out)/100.0) 
 		pr_CO2_3 = pr_CO2_1.to_f - pr_CO2_2.to_f
 		r_CO2 = pr_CO2_3.to_f/massT.to_f
+
+		@debug = @debug + "<br>pr_CO2_1 = (vf/100.0)*( (yCO2tn - yCO2t0)/(tn-t0) )"
+		@debug = @debug + "<br>pr_CO2_2 = pcCO2*vA*( (yCO2in - yCO2out)/100.0) "
+		@debug = @debug + "<br>pr_CO2_3 = pr_CO2_1.to_f - pr_CO2_2.to_f"
+		@debug = @debug + "<br>r_CO2 = pr_CO2_3.to_f/massT.to_f"
+
 		@debug = @debug + "<br><br>" + "pr_CO2_1 = #{pr_CO2_1}"
 		@debug = @debug + "<br>" + "pr_CO2_2 = #{pr_CO2_2}"
 		@debug = @debug + "<br>" + "pr_CO2_3 = #{pr_CO2_3}"
 		@debug = @debug + "<br>" + "r_CO2 = #{r_CO2}"
 		
-
-		
+	
 		
 		#r_CO2=(((vf * ((yCO2tn - yCO2t0)/(tn-t0)/100))) -(pcCO2 * vA * ((yCO2in - yCO2out) / 100))) / massT
-		#r_CO2=(((vf * ( ((yCO2tn-yCO2t0)/(tn-t0)/100))))-(pcCO2*vA*(yCO2in - yCO2out) / 100)) / massT
-		logger.debug("r_CO2 = #{r_CO2}")
+		#r_CO2=(((vf * ( ((yCO2tn-yCO2t0)/(tn-t0)/100))))-(pcCO2*vA*(yCO2in - yCO2out) / 100)) / massT		
 		
 
 		rQ=(r_CO2 / r_O2).abs()
-		logger.debug("rQ = #{rQ}")
+		@debug = @debug + "<br>rQ = #{rQ}"
 
 		dE=  54.504535 +
 			-0.829271*l + 
@@ -389,6 +393,22 @@ private
 		    1.149526*asccia + 
 		    -1.333054*casc +
 		    -0.517378*usndcasc
+
+
+		    @debug = @debug +
+		    "<br><br>
+			dE=  54.504535 +
+				-0.829271*l + 
+				-0.009992*(2.71828182845904**a) + 
+				0.859552*b +
+				-0.224326*sl + 
+				1.292377*Math.sin(r_CO2) + 
+			    -2.759410*gD + 
+			    42.138068*notreatment + 
+			    1.149526*asccia + 
+			    -1.333054*casc +
+			    -0.517378*usndcasc		    
+		    "
 		
 		@debug = @debug +
 		"<br><br>
@@ -419,8 +439,8 @@ private
 
 		"
 
-		@debug = @debug + "<br>" + "dE = #{dE}"
-		@debug =""
+		@debug = @debug + "<br>" + "dE = #{dE}"		
+		#@debug =""
 		
 		@vA 	= vA
 		@vtotal = vtotal

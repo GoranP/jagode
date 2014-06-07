@@ -46,7 +46,7 @@
 		<header>
 
 			<h1>C.A.P.P.A.B.L.E. <sup>&#169;</sup></h1>
-			<p class="description">Browning in fresh-cut apples packaged under modified atmosphere
+			<p class="description">Microbial growth on fresh-cut apple with modified atmosphere
 			   <%= link_to image_tag("home2.png", size: "63x63", :border=>"0", :align=>"right"), '/', :alt=>"Home", :title=>"Home"%>
 			</p>
 
@@ -55,13 +55,11 @@
 	<section id="content">
 
 
-<h2>Calculate browning in fresh-cut apples packaged under modified atmosphere from respiration rates</h2>
-<br>
-
-<br>
+<h2>Calculate microbial growth under modified atmosphere</h2>
 
 <br>
 <br>
+
 <strong>Type in the respiration parameters:</strong>
 <br>
 <%= form_tag('/apple/r5eq14') %>
@@ -123,12 +121,12 @@
 </tr>
 
 <tr>
-<td><%= label_tag(:yO2_out,"External Volumetric Concentration O<sub>2</sub> in package:".html_safe) %></td>
+<td><%= label_tag(:yO2_out,"External Volumetric Concentration O<sub>2</sub>:".html_safe) %></td>
 <td><%= text_field_tag(:param_yO2_out,@yO2out) %> <%= label_tag(:percent,"[%]")%></td>
 </tr>
 
 <tr>
-<td><%= label_tag(:yCO2_out,"External Volumetric Concentration CO<sub>2</sub> in package:".html_safe) %></td>
+<td><%= label_tag(:yCO2_out,"External Volumetric Concentration CO<sub>2</sub>:".html_safe) %></td>
 <td><%= text_field_tag(:param_yCO2_out,@yCO2out) %> <%= label_tag(:percent,"[%]")%></td>
 </tr>
 
@@ -220,17 +218,8 @@
 <nav>			
 	<h2><b>MODELS:</b></h2>
 	<ul>
-		<h4><b>NON-TREATED APPLES</b></h4>
-		<li><a href="/apple/eq1">Browning (CIELab) over storage time</a></li>
-		<li><a href="/apple/eq2">Soluble solids content</a></li>
-		<li><a href="/apple/eq2">pH</a></li>			
-		<h4><b>TREATED APPLES</b></h4>
-		<li><a href="/apple/eq4">Browning (CIELab) over storage time</a></li>
-		<li><a href="/apple/eq5">Sensory Evaluation</a></li>
-		<li><a href="/apple/st">Fresh-cut apple shelf-life</a></li>
-		<li><a href="/apple/r3eq1">Modified vs. normal atmosphere</a></li>
-		<li><a href="/apple/r3eq2">Browning (CIELab) modified vs. normal atmosphere</a></li>
-
+		<%= render('non_treated_apples') %>
+		<%= render('treated_apples') %>
 
 	</ul>
 </nav>

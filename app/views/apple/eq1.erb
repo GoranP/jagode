@@ -128,16 +128,8 @@
 <nav>			
 	<h2><b>MODELS:</b></h2>
 	<ul>
-		<h4><b>NON-TREATED APPLES</b></h4>
-		<li><a href="/apple/eq1">Browning (CIELab) over storage time</a></li>
-		<li><a href="/apple/eq2">Soluble solids content</a></li>
-		<li><a href="/apple/eq2">pH</a></li>			
-		<h4><b>TREATED APPLES</b></h4>
-		<li><a href="/apple/eq4">Browning (CIELab) over storage time</a></li>
-		<li><a href="/apple/eq5">Sensory Evaluation</a></li>
-		<li><a href="/apple/st">Fresh-cut apple shelf-life</a></li>
-		<li><a href="/apple/r3eq1">Modified vs. normal atmosphere</a></li>
-		<li><a href="/apple/r3eq2">Browning (CIELab) modified vs. normal atmosphere</a></li>
+		<%= render('non_treated_apples') %>
+		<%= render('treated_apples') %>
 		
 	</ul>
 </nav>
