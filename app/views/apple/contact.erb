@@ -52,7 +52,15 @@
 			</p>
 		</header>
 <div id="wrapper">
-<section id="content">
+
+<section id="content" style="width:100%"">
+<nav>			
+	<h2><b>MODELS:</b></h2>
+	<ul>
+		<%= render('non_treated_apples') %>
+		<%= render('treated_apples') %>		
+	</ul>
+</nav>
 
 <h2>Contact us</h2>
     
@@ -65,22 +73,13 @@
 	    <input type="submit" value="Send email"/>
     </form> 
 	</div>
+
 	<div id="notice" style=<%= "color:#{@color}" %>><strong><%= @notice %></strong></div>
 	</p>
+
+
 </section>
+
+</div>
 </div>
 
-<nav>			
-	<h2><b>MODELS:</b></h2>
-	<ul>
-		<%= render('non_treated_apples') %>
-		<%= render('treated_apples') %>
-		
-	</ul>
-</nav>
-<section id="extra">
-	<h2><b><u><font size="-1"></font></u></b></h2>
-	<p><div align="">			
-	<h2><b><u><font size="-1"></font></u></b></h2>			
-	</div></p>			
-</section>
