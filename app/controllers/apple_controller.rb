@@ -1,6 +1,6 @@
 class AppleController < ApplicationController
 	layout "apple.html.erb"
-	before_action :set_default_params, :only => [:r3eq2,:r5eq14]
+	before_action :set_default_params, :only => [:r3eq2,:r5eq14,:r6eq1]
 
 	def set_default_params
 		@length = 0.2 if params[:param_LP].nil?
@@ -34,6 +34,10 @@ class AppleController < ApplicationController
 		@b  =  params[:param_b].to_f
 		@sl =  params[:param_SL].to_f 
 		
+		#r6eq1
+		@flavan_3_oli = params[:param_flavan_3_oli].to_f  == 0.0 ? (10.0**-14).to_f : params[:param_flavan_3_oli].to_f
+		@delta_e = params[:param_delta_e].to_f  
+
 		logger.debug(params)
 		set_post_params
 	end
@@ -217,12 +221,64 @@ class AppleController < ApplicationController
 	def r5eq14
 		if request.post?
 			r5eq14_calc(@length,@width,@massT,@massP,@pcO2,@pcCO2,@yO2out,@yO2in,@yO2tn,@yO2t0,@tn,@t0,@yCO2tn,@yCO2t0,@yCO2in,@yCO2out,@l,@a,@b,@sl,@sorta,@treatement,@pSSC)
+			@debug =""
 		end
+	end
+
+	
+	def r6eq1
+		if request.post?
+			r6eq1_calc(@length,@width,@massT,@massP,@pcO2,@pcCO2,@yO2out,@yO2in,@yO2tn,@yO2t0,@tn,@t0,@yCO2tn,@yCO2t0,@yCO2in,@yCO2out,@l,@a,@b,@sl,@sorta,@treatement,@pSSC)
+		end
+
 	end
 
 
 
+
 private	
+	def r6eq1_calc(length,width,massT,massP,pcO2,pcCO2,yO2out,yO2in,yO2tn,yO2t0,tn,t0,yCO2tn,yCO2t0,yCO2in,yCO2out,l,a,b,sl,sorta,treatement,sSC)
+		#everything same as r5eq14_calc with few adjustements
+		r5eq14_calc(@length,@width,@massT,@massP,@pcO2,@pcCO2,@yO2out,@yO2in,@yO2tn,@yO2t0,@tn,@t0,@yCO2tn,@yCO2t0,@yCO2in,@yCO2out,@l,@a,@b,@sl,@sorta,@treatement,@pSSC)
+
+		#Golden Delicous
+		gD = sorta == 1 ? 1 : 0
+		#treatement
+		notreatment = treatement == 1 ? 1 : 0
+		asccia 		= treatement == 2 ? 1 : 0
+		casc 		= treatement == 3 ? 1 : 0
+		usndcasc	= treatement == 4 ? 1 : 0
+
+		@debug = @debug + "<br>formula flavan<br>
+			@log_TPC_O2 = 0.6115 + <br>
+		-0.0088*@amb_r_O2 + <br>
+		-0.0497*gD + <br>
+		0.2950*log10(@flavan_3_oli)*sign(@flavan_3_oli) + <br>
+		-0.2077*notreatment + <br>
+		-0.0172*asccia + <br>
+		-0.0349*casc + <br>
+		0.0007*usndcasc	<br><br>
+
+		flavan = #{@flavan_3_oli}<br>
+		dE = #{@delta_e.to_f}<br>
+		sL = #{@sL.to_f}<br>
+		"
+		#adjustements
+		@log_TPC_O2 = 0.6115 + 
+		-0.0088*@amb_r_O2 + 
+		-0.0497*gD + 
+		0.2950*Math.log10(@flavan_3_oli)*sign(@flavan_3_oli) + 
+		-0.2077*notreatment + 
+		-0.0172*asccia + 
+		-0.0349*casc + 
+		0.0007*usndcasc		
+
+		@debug = @debug + "<br>formula de<br>
+		@log_TPC_dE = 0.74096 + -0.00398*@delta_e + -0.00458*@sL<br>"
+		
+		@log_TPC_dE = 0.74096 + -0.00398*@delta_e.to_f + -0.00458*@sL.to_f
+
+	end
 
 	def r5eq14_calc(length,width,massT,massP,pcO2,pcCO2,yO2out,yO2in,yO2tn,yO2t0,tn,t0,yCO2tn,yCO2t0,yCO2in,yCO2out,l,a,b,sl,sorta,treatement,sSC)
 
@@ -314,7 +370,7 @@ private
 		@debug = @debug + "<br>" + "@amb_r_CO2 = #{@amb_r_CO2}"
 		@debug = @debug + "<br>" + "@ebac_r_O2 = #{@ebac_r_O2}"
 		@debug = @debug + "<br>" + "@ebac_r_CO2 = #{@ebac_r_CO2}"
-		@debug =""
+		
 		
 		@vA 	= vA
 		@vtotal = vtotal
