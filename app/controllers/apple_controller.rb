@@ -487,7 +487,7 @@ private
 
 	def st_calc(pH,ssc,seval,dE,gD,noTR)
 
-		@debug =""
+		@debug ="---- debug ---- <br>"
 		notreatment = noTR == 0 ? 1 : 0
 		asccia		  = noTR == 1 ? 1 : 0
 		casc  			= noTR == 2 ? 1 : 0
