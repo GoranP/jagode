@@ -56,16 +56,16 @@
 
 <section id="content">
 
-<h2>Calculate the lenght of shelf-life </h2>
+<h2>Calculate the length of shelf-life </h2>
 <br>
 
 <strong>Select apple cultivar:</strong>
 <br>
 <%= form_tag('/apple/st') %>
-<%= radio_button_tag(:sorta, value = "1", checked = true, options = {})  %>
+<%= radio_button_tag(:sorta, value = "1", checked = @sorta == 1, options = {})  %>
 <%= label_tag(:cultivars,'Golden Delicious') %>
 <br>
-<%= radio_button_tag(:sorta, value = "0", checked = false, options = {})  %>
+<%= radio_button_tag(:sorta, value = "0", checked = @sorta == 0, options = {})  %>
 <%= label_tag(:cultivars,'Cripps Pink') %>
 <br>
 
@@ -73,19 +73,19 @@
 <br>
 <strong>Select anti-browning treatment:</strong>
 <br>
-<%= radio_button_tag(:treatement, value = "1", checked = true, options = {})  %>
-<%= label_tag(:treat,'No treatement') %>
+<%= radio_button_tag(:treatement, value = "0", checked = @treatement == 0, options = {})  %>
+<%= label_tag(:treat,'No treatment') %>
 <br>
-<%= radio_button_tag(:treatement, value = "0", checked = false, options = {})  %>
+<%= radio_button_tag(:treatement, value = "1", checked = checked = @treatement == 1, options = {})  %>
 <%= label_tag(:treat,'Ascorbic with citric acid') %>
 <br>
-<%= radio_button_tag(:treatement, value = "0", checked = false, options = {})  %>
+<%= radio_button_tag(:treatement, value = "2", checked = checked = @treatement == 2, options = {})  %>
 <%= label_tag(:treat,'Ca-ascorbate ') %>
 <br>
-<%= radio_button_tag(:treatement, value = "0", checked = false, options = {})  %>
+<%= radio_button_tag(:treatement, value = "3", checked = checked = @treatement == 3, options = {})  %>
 <%= label_tag(:treat,'Ultrasound (3 min) with Ca-ascorbate ') %>
 <br>
-<%= radio_button_tag(:treatement, value = "0", checked = false, options = {})  %>
+<%= radio_button_tag(:treatement, value = "4", checked = checked = @treatement == 4, options = {})  %>
 <%= label_tag(:treat,'Ultrasound (3 min) ascorbic and citric acid') %>
 <br>
 <br>
@@ -96,40 +96,20 @@
 
 <table>
 <tr>
-<td><%= label_tag(:L,"L<sup>*</sup> (0-100)".html_safe) %></td>
-<td><%= text_field_tag(:param_L) %></td>
-</tr>
-<tr>
-<td><%= label_tag(:a,"a<sup>*</sup> (from -a<sup>*</sup> to +a<sup>*</sup>)".html_safe) %></td>
-<td><%= text_field_tag(:param_a) %></td>
-</tr>
-<tr>
-<td><%= label_tag(:b,"b<sup>*</sup> (from -b<sup>*</sup> to +b<sup>*</sup>)".html_safe) %></td>
-<td><%= text_field_tag(:param_b) %></td>
-</tr>
-<tr>
-<td><%= label_tag(:c,"C<sup>*</sup> (C<sup>*</sup>&ge; 0)".html_safe) %></td>
-<td><%= text_field_tag(:param_c) %></td>
+<td><%= label_tag(:delta_e,"&#916E<sup>*</sup><sub>ab</sub> (&#916E<sup>*</sup><sub>ab</sub>&ge; 0)".html_safe) %></td>
+<td><%= text_field_tag(:param_delta_e,@delta_e) %> </td>
 </tr>
 <tr>
 <td><%= label_tag(:ph,"pH (0-14)") %></td>
-<td><%= text_field_tag(:param_ph) %></td>
+<td><%= text_field_tag(:param_ph,@pH) %></td>
 </tr>
 <tr>
 <td><%= label_tag(:ssc,"SSC (SSC ≥ 0)") %></td>
-<td><%= text_field_tag(:param_ssc) %></td>
+<td><%= text_field_tag(:param_ssc,@ssc) %></td>
 </tr>
 <tr>
 <td><%= label_tag(:seval,"Sensory evaluation (1 – 7)") %></td>
-<td><%= text_field_tag(:param_seval) %></td>
-</tr>
-<tr>
-<td><%= label_tag(:tx,"Texture (TX>0)") %></td>
-<td><%= text_field_tag(:param_tx) %> </td>
-</tr>
-<tr>
-<td><%= label_tag(:delta_e,"&#916E<sup>*</sup><sub>ab</sub> (&#916E<sup>*</sup><sub>ab</sub>&ge; 0)".html_safe) %></td>
-<td><%= text_field_tag(:param_delta_e) %> </td>
+<td><%= text_field_tag(:param_seval,@seval) %></td>
 </tr>
 
 </table>
@@ -156,37 +136,46 @@ function legalCheck() {
 <br>
 <body onload="legalCheck()">
 
-<strong>Set limit (M) for for fresh-cut apple</strong>
+<strong>Set limit (M) for fresh-cut apple</strong>
 
 <br>
-<%= radio_button_tag(:param_legal, value = "0", checked = true, options = {:id=>'legal', :onclick=>'javascript:legalCheck();'})  %>
+<%= radio_button_tag(:param_legal, value = "0", checked = @legal == 0 , options = {:id=>'legal', :onclick=>'javascript:legalCheck();'})  %>
 <%= label_tag(:limit,'Legal limit') %>
 
-<%= radio_button_tag(:param_legal, value = "1", checked = false, options = {:onclick=>'javascript:legalCheck();'})  %>
+<%= radio_button_tag(:param_legal, value = "1", checked = @legal == 1, options = {:onclick=>'javascript:legalCheck();'})  %>
 <%= label_tag(:treat,'Spoilage limit') %>
 <div id='params_ebac'>	
 	<%= label_tag(:limit,'Enter maximum allowed [cfu/g] Enterobacteriaceae:') %>
-	<%= text_field_tag(:param_ebac) %>	
+	<%= text_field_tag(:param_ebac,@ebac) %>	
 </div>
 
 <div id='params_amb'>	
 	<%= label_tag(:limit,'Enter maximum recommended [cfu/g] for Aerobic mesophilic bacteria:') %>
-	<%= text_field_tag(:param_amb) %>
+	<%= text_field_tag(:param_amb,@amb) %>
 </div>
 <br>
 <br>
+
 
 
 <% unless @rezultat.nil? %>
 	Length of shelf-life is:
 	<strong>
 		<div style="color:red">
-			STr = <%= number_with_precision @rezultat,:precision=>2  %> days
+			log_SL_days = <%= number_with_precision @rezultat,:precision=>2  %> days
 			<br>
-			ΔST = <%= number_with_precision @rezultat_delta,:precision=>2  %> days
+			SL_days = <%= number_with_precision 10**@rezultat,:precision=>2  %> days
+			<br>
+			ΔST = <%= number_with_precision @rezultat_delta,:precision=>2  %> days<br>			
+			<br>			
+			ΔST (sa 10**log_SL_days) = <%= number_with_precision @rezultat_delta_P,:precision=>2  %> days<br>			
+			<br>
 		</div>
+	<%= @debug.html_safe %>
 	</strong> 
+
 <% end %>
+
 
 
 

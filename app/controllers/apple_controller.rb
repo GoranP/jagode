@@ -153,29 +153,29 @@ class AppleController < ApplicationController
 	end
 
 	def st
+		@sorta = 1
+		@treatement = 0
+		@legal = 0
+
 		if request.post?
 			logger.debug(params)
 
-			sorta 		= params[:sorta].to_i
-			treatement 	= params[:treatement].to_i
-			l 		 	= params[:param_L].to_f
-			a 			= params[:param_a].to_f
-			b 			= params[:param_b].to_f
-			c 			= params[:param_c].to_f
-			pH			= params[:param_ph].to_f
-			ssc			= params[:param_ssc].to_f
-			seval		= params[:param_seval].to_f == 0.0 ? (10.0**-14).to_f : params[:param_seval].to_f
-			tx 			= params[:param_tx].to_f == 0.0 ? (10.0**-14).to_f : params[:param_tx].to_f
-			delta_e		= params[:param_delta_e].to_f == 0.0 ? (10.0**-14).to_f : params[:param_delta_e].to_f
-			legal		= params[:param_legal].to_i
-			ebac		= params[:param_ebac].to_f == 0.0 ? (10.0**-14).to_f : params[:param_ebac].to_f
-			amb			= params[:param_amb].to_f == 0.0 ? (10.0**-14).to_f : params[:param_amb].to_f
+			@sorta 		= params[:sorta].to_i
+			@treatement 	= params[:treatement].to_i
+			@pH			  = params[:param_ph].to_f
+			@ssc			= params[:param_ssc].to_f
+			@seval		= params[:param_seval].to_f == 0.0 ? (10.0**-14).to_f : params[:param_seval].to_f
+			@delta_e	= params[:param_delta_e].to_f == 0.0 ? (10.0**-14).to_f : params[:param_delta_e].to_f
+			@legal		= params[:param_legal].to_i
+			@ebac		  = params[:param_ebac].to_f == 0.0 ? (10.0**-14).to_f : params[:param_ebac].to_f
+			@amb			= params[:param_amb].to_f == 0.0 ? (10.0**-14).to_f : params[:param_amb].to_f
 						
-			@rezultat = st_calc(l,a,b,c,pH,ssc,seval,tx,delta_e,sorta,treatement)			
+			@rezultat = st_calc(@pH,@ssc,@seval,@delta_e,@sorta,@treatement)			
 
-			st = legal == 0 ? st_legal(ebac) : st_spoiled(amb)
+			st = @legal == 0 ? st_legal(@ebac) : st_spoiled(@amb)
 
 			@rezultat_delta = sign(st - @rezultat) < 0 ? 0 : (st - @rezultat)
+			@rezultat_delta_P = sign(st - 10**@rezultat) < 0 ? 0 : (st - 10**@rezultat)
 
 		end		
 	end
@@ -485,22 +485,55 @@ private
 
 	end
 
-	def st_calc(l,a,b,c,pH,ssc,seval,tX,dE,gD,noTR)
+	def st_calc(pH,ssc,seval,dE,gD,noTR)
 
-		rez = 	139.22516 +
-				4.44313*gD + 
-				2.46953*noTR +
-				-0.19282*l +
-				1.18667*a +
-				10.12652*b +
-				-10.19815*c +
-				-20.15348*pH +
-				-1.38471*ssc +
-				-7.19258*Math.log10(seval.abs())*sign(seval) +
-				-4.48949*Math.log10(tX.abs())*sign(tX) +
-				1.16645*Math.log10(dE.abs())*sign(dE) 		
+		@debug =""
+		notreatment = noTR == 0 ? 1 : 0
+		asccia		  = noTR == 1 ? 1 : 0
+		casc  			= noTR == 2 ? 1 : 0
+		usndcasc 	  = noTR == 3 || noTR == 4  ? 1 : 0
 
-		sign(rez) < 0 ? 0 : rez
+
+		log_SL_days = 10.07433 + 
+									0.03928*Math.log10(dE) + 
+									-10.28366 * Math.log10(pH) + 
+									0.40404*Math.log10(seval) + 
+									-2.76973*Math.log10(ssc) + 
+									0.41726*gD + 
+									0.21673*notreatment +
+									0.02310*asccia + 
+									0.04156*casc + 
+									0.13848*usndcasc +
+									gD*(-0.03620*notreatment - 0.02170*asccia - 0.08721*casc - 0.24059*usndcasc)
+
+		@debug = @debug + "<br>FORMULA:<br>
+			log_SL_days = 10.07433 + <br>
+									0.03928*Math.log10(dE) + <br>
+									-10.28366 * Math.log10(pH) + <br>
+									0.40404*Math.log10(seval) + <br>
+									-2.76973*Math.log10(ssc) + <br>
+									0.41726*gD + <br>
+									0.21673*notreatment +<br>
+									0.02310*asccia + <br>
+									0.04156*casc + <br>
+									0.13848*usndcasc +<br>
+									gD*(-0.03620*notreatment - 0.02170*asccia - 0.08721*casc - 0.24059*usndcasc)	<br>
+									<br>"
+		@debug = @debug +
+							"notreatment = #{notreatment}<br>
+							asccia = #{asccia}<br>
+							casc = #{casc}<br>
+							usndcasc = #{usndcasc}<br>
+							pH = #{pH}<br>
+							ssc = #{ssc}<br>
+							seval = #{seval}<br>
+							dE = #{dE}<br>
+							gD = #{gD}<br>
+							noTR = #{noTR}<br>
+							log_SL_days = #{log_SL_days}<br>
+							"
+
+		sign(log_SL_days) < 0 ? 0 : log_SL_days
 
 	end
 
