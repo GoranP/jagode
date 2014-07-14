@@ -175,7 +175,8 @@ class AppleController < ApplicationController
 			@amb			= params[:param_amb].to_f == 0.0 ? (10.0**-14).to_f : params[:param_amb].to_f
 						
 			@rezultat = st_calc(@pH,@ssc,@seval,@delta_e,@sorta,@treatement)			
-
+			@debug = ""
+			
 			st = @legal == 0 ? st_legal(@ebac) : st_spoiled(@amb)
 
 			@rezultat_delta = sign(st - @rezultat) < 0 ? 0 : (st - @rezultat)

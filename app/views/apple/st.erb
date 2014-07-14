@@ -140,10 +140,10 @@ function legalCheck() {
 
 <br>
 <%= radio_button_tag(:param_legal, value = "0", checked = @legal == 0 , options = {:id=>'legal', :onclick=>'javascript:legalCheck();'})  %>
-<%= label_tag(:limit,'Legal limit') %>
+<%= label_tag(:limit,'EBac') %>
 
 <%= radio_button_tag(:param_legal, value = "1", checked = @legal == 1, options = {:onclick=>'javascript:legalCheck();'})  %>
-<%= label_tag(:treat,'Spoilage limit') %>
+<%= label_tag(:treat,'AMB') %>
 <div id='params_ebac'>	
 	<%= label_tag(:limit,'Enter maximum allowed [cfu/g] Enterobacteriaceae:') %>
 	<%= text_field_tag(:param_ebac,@ebac) %>	
@@ -157,18 +157,11 @@ function legalCheck() {
 <br>
 
 
-
 <% unless @rezultat.nil? %>
 	Length of shelf-life is:
 	<strong>
 		<div style="color:red">
-			log_SL_days = <%= number_with_precision @rezultat,:precision=>2  %> days
-			<br>
-			SL_days = <%= number_with_precision 10**@rezultat,:precision=>2  %> days
-			<br>
-			ΔST = <%= number_with_precision @rezultat_delta,:precision=>2  %> days<br>			
-			<br>			
-			ΔST (sa 10**log_SL_days) = <%= number_with_precision @rezultat_delta_P,:precision=>2  %> days<br>			
+			ΔST  = <%= number_with_precision @rezultat_delta_P,:precision=>2  %> days<br>			
 			<br>
 		</div>
 	<%= @debug.html_safe %>
