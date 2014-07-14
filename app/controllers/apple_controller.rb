@@ -279,6 +279,11 @@ private
 		
 		@log_TPC_dE = 0.74096 + -0.00398*@delta_e.to_f + -0.00458*@sL.to_f
 
+		@log_TPC_O2 = 10**@log_TPC_O2
+		@log_TPC_dE	= 10**@log_TPC_dE
+
+		@debug=""
+
 	end
 
 	def r5eq14_calc(length,width,massT,massP,pcO2,pcCO2,yO2out,yO2in,yO2tn,yO2t0,tn,t0,yCO2tn,yCO2t0,yCO2in,yCO2out,l,a,b,sl,sorta,treatement,sSC)

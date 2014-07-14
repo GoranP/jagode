@@ -46,7 +46,7 @@
     <header>
 
       <h1>C.A.P.P.A.B.L.E. <sup>&#169;</sup></h1>
-      <p class="description">Microbial growth on fresh-cut apple with modified atmosphere
+      <p class="description">Phenolic content in fresh-cut apple with modified atmosphere 
          <%= link_to image_tag("home2.png", size: "63x63", :border=>"0", :align=>"right"), '/', :alt=>"Home", :title=>"Home"%>
       </p>
 
@@ -55,7 +55,7 @@
   <section id="content">
 
 
-<h2>Calculate microbial growth under modified atmosphere</h2>
+<h2>Calculate change of phenolic content under modified atmosphere</h2>
 
 <br>
 <br>
@@ -159,10 +159,6 @@
 <td><%= text_field_tag(:param_PC_CO2,@pcCO2) %> <%= label_tag(:percent,"[cm<sup>3</sup>/m×day×atm]".html_safe)%></td>
 </tr>
 
-<tr>
-<td><%= label_tag(:ssc,"SSC (SSC ≥ 0)") %></td>
-<td><%= text_field_tag(:param_SSC,@pSSC) %></td>
-</tr>
 
 </table>
 
@@ -172,11 +168,16 @@
 
 <table>
 <tr>
-<td><%= label_tag(:a,"a<sup>*</sup>".html_safe) %></td>
+<td><%= label_tag(:a,"a<sup>*</sup>:".html_safe) %></td>
 <td><%= text_field_tag(:param_a,@a) %></td>
 </tr>
 <tr>
-<td><%= label_tag(:SL,"SL") %></td>
+<td><%= label_tag(:ssc,"SSC (SSC ≥ 0):") %></td>
+<td><%= text_field_tag(:param_SSC,@pSSC) %><label for="SL_H"> [Bx°]</label></td>
+</tr>
+
+<tr>
+<td><%= label_tag(:SL,"SL:") %></td>
 <td><%= text_field_tag(:param_SL,@sl) %> <%= label_tag(:SL_H,"[days]") %></td>
 </tr>
 
@@ -186,7 +187,7 @@
 </tr>
 
 <tr>
-<td><%= label_tag(:delta_e,"&#916E<sup>*</sup><sub>ab</sub> (&#916E<sup>*</sup><sub>ab</sub>&ge; 0)".html_safe) %></td>
+<td><%= label_tag(:delta_e,"&#916E<sup>*</sup><sub>ab</sub> (&#916E<sup>*</sup><sub>ab</sub>&ge; 0):".html_safe) %></td>
 <td><%= text_field_tag(:param_delta_e,@delta_e) %> </td>
 <tr>
 </table>
@@ -229,20 +230,20 @@
 </div>
 
 <div style="color:red">
-<strong>EBAC CO<sub>2</sub> = </strong> <%= @ebac_r_CO2 %> [log CFU/g]
+<strong>EBac CO<sub>2</sub> = </strong> <%= @ebac_r_CO2 %> [log CFU/g]
 </div>
 
 <div style="color:red">
-<strong>EBAC O<sub>2</sub> = </strong> <%=  @ebac_r_O2  %> [log CFU/g]
+<strong>EBac O<sub>2</sub> = </strong> <%=  @ebac_r_O2  %> [log CFU/g]
 </div>
 
 
 <div style="color:red">
-<strong>log_TPC_O2 = </strong> <%=  @log_TPC_O2  %> [mg/g d.m.]
+<strong>TPC (from O<sub>2</sub>)  = </strong> <%=  @log_TPC_O2  %> [mg/g d.m.]
 </div>
 
 <div style="color:red">
-<strong>log_TPC_dE = </strong> <%=  @log_TPC_dE  %> [mg/g d.m.]
+<strong>TPC (from ΔE<sup>*</sup><sub>ab</sub>) = </strong> <%=  @log_TPC_dE  %> [mg/g d.m.]
 </div>
 
 <br>
