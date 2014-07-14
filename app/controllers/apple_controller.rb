@@ -553,7 +553,7 @@ private
 		log_SL_days = 10.07433 + 
 									0.03928*Math.log10(dE) + 
 									-10.28366 * Math.log10(pH) + 
-									0.40404*Math.log10(seval) + 
+									-0.40404*Math.log10(seval) + 
 									-2.76973*Math.log10(ssc) + 
 									0.41726*gD + 
 									0.21673*notreatment +
